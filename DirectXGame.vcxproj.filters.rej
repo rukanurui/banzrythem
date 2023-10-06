@@ -1,0 +1,32 @@
+diff a/DirectXGame.vcxproj.filters b/DirectXGame.vcxproj.filters	(rejected hunks)
+@@ -30,30 +30,15 @@
+     <ClCompile Include="DXCommon.cpp">
+       <Filter>ソース ファイル</Filter>
+     </ClCompile>
+-    <ClCompile Include="model.cpp">
+-      <Filter>ソース ファイル</Filter>
+-    </ClCompile>
+     <ClCompile Include="DebugText.cpp">
+       <Filter>ソース ファイル</Filter>
+     </ClCompile>
+     <ClCompile Include="Audio.cpp">
+       <Filter>ソース ファイル</Filter>
+     </ClCompile>
+-    <ClCompile Include="Modelfbx.cpp">
+-      <Filter>ソース ファイル</Filter>
+-    </ClCompile>
+-    <ClCompile Include="FbxLoader.cpp">
+-      <Filter>ソース ファイル</Filter>
+-    </ClCompile>
+     <ClCompile Include="Camera.cpp">
+       <Filter>ソース ファイル</Filter>
+     </ClCompile>
+-    <ClCompile Include="Object3d.cpp">
+-      <Filter>ソース ファイル</Filter>
+-    </ClCompile>
+-    <ClCompile Include="fbxobj3d.cpp">
+-      <Filter>ソース ファイル</Filter>
+-    </ClCompile>
+     <ClCompile Include="2d\PostEffect.cpp">
+       <Filter>ソース ファイル</Filter>
+     </ClCompile>

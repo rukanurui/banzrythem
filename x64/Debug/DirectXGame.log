@@ -1,0 +1,18 @@
+﻿  compilation object save succeeded; see C:\Users\mommo\Desktop\バンズリズム\x64\Debug\BasicPS.cso
+  compilation object save succeeded; see C:\Users\mommo\Desktop\バンズリズム\x64\Debug\BasicVS.cso
+C:\Users\mommo\Desktop\�o���Y���Y��\Resources\shaders\FBXPS.hlsl(32,8-40): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\mommo\Desktop\バンズリズム\x64\Debug\FBXPS.cso
+  compilation object save succeeded; see C:\Users\mommo\Desktop\バンズリズム\x64\Debug\FBXVS.cso
+  compilation object save succeeded; see C:\Users\mommo\Desktop\バンズリズム\x64\Debug\OBJPixelShader.cso
+  compilation object save succeeded; see C:\Users\mommo\Desktop\バンズリズム\x64\Debug\OBJVertexShader.cso
+  compilation object save succeeded; see C:\Users\mommo\Desktop\バンズリズム\x64\Debug\ParticleGS.cso
+  compilation object save succeeded; see C:\Users\mommo\Desktop\バンズリズム\x64\Debug\ParticlePS.cso
+  compilation object save succeeded; see C:\Users\mommo\Desktop\バンズリズム\x64\Debug\ParticleVS.cso
+  compilation object save succeeded; see C:\Users\mommo\Desktop\バンズリズム\x64\Debug\PostEffectPS.cso
+  compilation object save succeeded; see C:\Users\mommo\Desktop\バンズリズム\x64\Debug\PostEffectVS.cso
+  compilation object save succeeded; see C:\Users\mommo\Desktop\バンズリズム\x64\Debug\SpriteNoisePS.cso
+  compilation object save succeeded; see C:\Users\mommo\Desktop\バンズリズム\x64\Debug\SpriteNoiseVS.cso
+  compilation object save succeeded; see C:\Users\mommo\Desktop\バンズリズム\x64\Debug\SpritePS.cso
+  compilation object save succeeded; see C:\Users\mommo\Desktop\バンズリズム\x64\Debug\SpriteVS.cso
+  DirectXGame.vcxproj -> C:\Users\mommo\Desktop\バンズリズム\x64\Debug\DirectXGame.exe

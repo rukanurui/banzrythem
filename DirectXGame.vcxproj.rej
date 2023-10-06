@@ -1,0 +1,37 @@
+diff a/DirectXGame.vcxproj b/DirectXGame.vcxproj	(rejected hunks)
+@@ -151,19 +151,30 @@
+     <ClCompile Include="2d\PostEffect.cpp" />
+     <ClCompile Include="2d\Sprite.cpp" />
+     <ClCompile Include="2d\SpriteCommon.cpp" />
++    <ClCompile Include="3d\FbxLoader.cpp" />
++    <ClCompile Include="3d\fbxobj3d.cpp" />
++    <ClCompile Include="3d\model.cpp" />
++    <ClCompile Include="3d\Modelfbx.cpp" />
++    <ClCompile Include="3d\Object3d.cpp" />
+     <ClCompile Include="Audio.cpp" />
++    <ClCompile Include="BaseCollider.cpp" />
+     <ClCompile Include="Camera.cpp" />
++    <ClCompile Include="ColisionInfo.cpp" />
++    <ClCompile Include="Collision.cpp" />
++    <ClCompile Include="CollisionManager.cpp" />
++    <ClCompile Include="CollisionPrimitive.cpp" />
++    <ClCompile Include="CollisionTypes.cpp" />
+     <ClCompile Include="DebugText.cpp" />
+     <ClCompile Include="DXCommon.cpp" />
+-    <ClCompile Include="FbxLoader.cpp" />
+-    <ClCompile Include="fbxobj3d.cpp" />
++    <ClCompile Include="Enemy.cpp" />
+     <ClCompile Include="GameScene.cpp" />
+     <ClCompile Include="Input.cpp" />
+     <ClCompile Include="main.cpp" />
+-    <ClCompile Include="model.cpp" />
+-    <ClCompile Include="Modelfbx.cpp" />
+-    <ClCompile Include="Object3d.cpp" />
++    <ClCompile Include="pad.cpp" />
++    <ClCompile Include="Pbullet.cpp" />
+     <ClCompile Include="Player.cpp" />
++    <ClCompile Include="RayCastHit.cpp" />
++    <ClCompile Include="SphereCollider.cpp" />
+     <ClCompile Include="WindowsApp.cpp" />
+   </ItemGroup>
+   <ItemGroup>
