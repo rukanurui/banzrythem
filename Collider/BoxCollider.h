@@ -4,7 +4,7 @@
 #include<DirectXMath.h>
 
 //球衝突判定
-class BoxCollider :public BaseCollider, public Box
+class BoxCollider:public BaseCollider, public Box
 {
 private://エイリアス
 	// DirectX::を省略

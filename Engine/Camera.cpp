@@ -187,16 +187,73 @@ void Camera::MoveTarget(const XMVECTOR& move)
 	SetTarget(target_moved);
 }
 
-void Camera::CurrentUpdate(XMFLOAT3 vel)
+void Camera::CurrentUpdate()
 {
 	viewDirtyFlag = false;
 	
-	float oldeye = eye.y;
-
-	XMFLOAT3 oldpos{ eye };
 
 	// マウスの入力を取得
 	Input::MouseMove mouseMove = input->GetMouseMove();
+
+	if (mouseMove.lX == CurretmouseX || mouseMove.lY == CurretmouseY)
+	{
+		
+		float dy = (mouseMove.lX * scaleX) * 0.25;
+		float dx = (mouseMove.lY * scaleY) * 0.25;
+
+		angleX = -dx * XM_PI;
+		angleY = -dy * XM_PI;
+
+		viewDirtyFlag = true;
+	}
+
+	
+	anglelimitX += angleX;
+	anglelimitY += angleY;
+	/*
+	if (anglelimitX <= 1.4f && anglelimitX >= -1.4f)
+	{
+		angleculentX = anglelimitX;
+	}
+	else
+	{
+		anglelimitX = angleculentX;
+	}*/
+
+	//座標操作
+	if (!input->PushKey(DIK_A) && !input->PushKey(DIK_D)) Velocity.x = 0;
+	if ((input->PushKey(DIK_A) || input->PushKey(DIK_D)))
+	{
+
+		if (input->PushKey(DIK_A)) Velocity.x = -0.3f;
+		else
+		{
+			if (input->PushKey(DIK_D)) Velocity.x = 0.3f;
+		}
+
+		XMVECTOR move = { Velocity.x,Velocity.y,0,0 };
+
+		move = XMVector3Transform(move, matRot);
+		MoveTarget(move);
+	}
+
+
+	if (!input->PushKey(DIK_W) && !input->PushKey(DIK_S)) Velocity.z = 0;
+	if ((input->PushKey(DIK_W) || input->PushKey(DIK_S)))
+	{
+		if (input->PushKey(DIK_S)) Velocity.z = -0.3f;
+		else
+		{
+			if (input->PushKey(DIK_W)) Velocity.z = 0.3f;
+		}
+
+
+		XMVECTOR move = { 0,0,Velocity.z,0 };
+
+		move = XMVector3Transform(move, matRot);
+		MoveTarget(move);
+
+	}
 	
 	if (viewDirtyFlag == true)
 	{

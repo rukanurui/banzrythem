@@ -30,8 +30,6 @@
 using namespace DirectX;
 using namespace Microsoft::WRL;
 
-void spritetrans(XMFLOAT2 size,bool flag);
-
 //GameScene* reset(GameScene* gameScene,DXCommon* dxcommon, Input* input, Audio* audio, SpriteCommon* spritecommon, WindowsApp* windows)
 //{
 //    if (gameScene!=nullptr)
@@ -118,20 +116,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     //最初のシーンの生成
     BaseScene* scene = new TitleScene();
     sceneManager->NextScene(scene);
-
-    
-
-    char pla[64];
-
-    int tutoscene = 0;
-    int wait = 0;
-    int count = 0;
-
-    bool titleflag = true;
-
    
-
-
     
 #pragma endregion 描画初期化処理
 
@@ -174,12 +159,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
         //レンダ―テクスチャへの描画
         postEffect->PreDrawScene(dxCommon->GetCommandList());
-        //transEffect->PreDrawScene(dxCommon->GetCommandList());
 
         // スプライト描画前処理
         spriteCommon->PreDraw();
 
-        sceneManager->Draw();
+        
         
        
         // ４．描画コマンドここから
@@ -190,8 +174,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         //tuto->Draw();
         
 
-        postEffect->PostDrawScene(dxCommon->GetCommandList());
-        //transEffect->PostDrawScene(dxCommon->GetCommandList());
+       postEffect->PostDrawScene(dxCommon->GetCommandList());
 
         
         //描画前処理
@@ -200,12 +183,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         
         //ポストエフェクトの描画
         postEffect->Draw(dxCommon->GetCommandList());
-        //transEffect->Draw(dxCommon->GetCommandList());
         
-
-        //gameScene->SpriteDraw();
-
-
+        sceneManager->Draw();
 
         //描画後処理
         dxCommon->PostDraw();
@@ -244,18 +223,3 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         return 0;
  }
 
- void spritetrans(XMFLOAT2 size,bool flag)
- {
-     if (flag == true)
-     {
-         size.x -= 0.3f;
-         size.y -= 0.3f;
-     }
-     else
-     {
-         size.x += 0.3f;
-         size.y += 0.3f;
-     }
-
-
- }

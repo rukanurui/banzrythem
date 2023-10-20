@@ -97,8 +97,10 @@ public://メンバ関数
 	void SetCollider(BaseCollider* collider);
 	//ワールド座標更新
 	void UpdateWorld();
-	//弾道に合わせたスケール変化
+	//スケール変化
 	void MoveScaleZ(float Velocity);
+	//ベクトルによる座標移動
+	void MoveVector(const XMVECTOR& move);
 
 protected://メンバ変数
 	//定数バッファ

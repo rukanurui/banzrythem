@@ -231,9 +231,6 @@
     <ClInclude Include="Collider\BaseCollider.h">
       <Filter>ヘッダー ファイル\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="Collider\BoxCollider.h">
-      <Filter>ヘッダー ファイル\Collider</Filter>
-    </ClInclude>
     <ClInclude Include="Collider\ColisionInfo.h">
       <Filter>ヘッダー ファイル\Collider</Filter>
     </ClInclude>
@@ -338,6 +335,9 @@
     </ClInclude>
     <ClInclude Include="2d\Partmanager2d.h">
       <Filter>ヘッダー ファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider\BoxCollider.h">
+      <Filter>ヘッダー ファイル\Collider</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

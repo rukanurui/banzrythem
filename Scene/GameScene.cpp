@@ -34,7 +34,6 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     camera = new Camera(this->input, this->Windows);
     camera->Initialize(WindowsApp::window_width, WindowsApp::window_height, this->input);
 
-
 #pragma region 描画初期化処理
 
 
@@ -69,7 +68,31 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     //FBXパイプライン生成
     FBXobj3d::CreateGraphicsPipeline();
 
+    bunsmodel = FbxLoader::GetInstance()->LoadModelFromFile("testfbx");
+    modelfloor = FbxLoader::GetInstance()->LoadModelFromFile("floor");
 
+    bunsup = new FBXobj3d();
+    bunsup->Initialize();
+    bunsup->SetPosition({ 0.0f,5.0f,5.0f });
+    bunsup->SetScale({ 0.01f,0.001f,0.01f });
+    bunsup->SetModel(bunsmodel);
+    bunsup->SetCollider(new BoxCollider);
+
+    bunsdown = new FBXobj3d();
+    bunsdown->Initialize();
+    bunsdown->SetPosition({ 0.0f,2.0f,5.0f });
+    bunsdown->SetScale({ 0.01f,0.001f,0.01f });
+    bunsdown->SetModel(bunsmodel);
+    bunsdown->SetCollider(new BoxCollider);
+
+    //床
+    floor = new FBXobj3d();
+    floor->Initialize();
+    floor->SetPosition({ 0.0f,-1.0f,0.0f });
+    floor->SetScale({ 1.0f,0.1f,1.0f });
+    floor->SetModel(modelfloor);
+    //floor->SetCollider(new BoxCollider(XMVECTOR{ 100.0f,0.7f,100.0f,0 }, 1.0f));
+  
     //背景
 
     //プレイヤー関連処理
@@ -98,12 +121,6 @@ void GameScene::Update()
     // マウスの入力を取得
     Input::MouseMove mouseMove = input->GetMouseMove();
 
-    CurretmouseX = mouseMove.lX;
-    CurretmouseY = mouseMove.lY;
-
-    camera->SetmouseX(CurretmouseX);
-    camera->SetmouseY(CurretmouseY);
-
     //画面遷移処理
     if (transscene == false)
     {
@@ -113,18 +130,13 @@ void GameScene::Update()
         {
             transcount = 0.0f;
             transscene = true;
-            if (playscene==1)
-            {
-                const XMFLOAT3 respos = { 0,5,0 };
 
-                camera->SetTarget(respos);
-                //camera->SetEye(respos);
-                
-                camera->Update(WindowsApp::window_width, WindowsApp::window_height);
-                //camera->CurrentUpdate(player->GetVelocity());
+            const XMFLOAT3 respos = { 0.0f,5.0f,5.0f };
 
+            camera->SetTarget(respos);
+            //camera->SetEye(respos);
 
-            }
+            camera->Update(WindowsApp::window_width, WindowsApp::window_height);
         }
     }
 
@@ -132,9 +144,33 @@ void GameScene::Update()
     //ゲーム本編
     if (transscene == true)
     {
-        //描画のためにカメラの更新処理を一回呼び出す
 
-        //プレイヤーに敵が当たったらシーン遷移
+        // マウスの入力を取得
+        Input::MouseMove mouseMove = input->GetMouseMove();
+
+        CurretmouseX = mouseMove.lX;
+        CurretmouseY = mouseMove.lY;
+
+        camera->SetmouseX(CurretmouseX);
+        camera->SetmouseY(CurretmouseY);
+
+        //更新処理
+        bunsup->Update();
+        bunsdown->Update();
+        floor->Update();
+        camera->CurrentUpdate();
+
+        if (input->TriggerKey(DIK_SPACE))
+        {
+            upVel.m128_f32[1] = -0.1f;
+            downVel.m128_f32[1] = 0.1f;
+          
+        }
+     
+        bunsup->MoveVector(upVel);
+        bunsdown->MoveVector(downVel);
+        
+        //Rキーを押したらリトライ
         if (input->TriggerKey(DIK_R))
         {
             //次のシーンを生成
@@ -145,8 +181,8 @@ void GameScene::Update()
             sceneManager->SetplayScene(playscene);
         }
 
-        //敵全員倒したらクリア
-        if (input->TriggerKey(DIK_SPACE))
+        //SPACEキーをしたらクリアシーンへ
+        if (input->TriggerKey(DIK_P))
         {
             //次のシーンを生成
             BaseScene* scene = makeScene<ClearScene>();
@@ -168,15 +204,6 @@ void GameScene::Draw()
     // コマンドリストの取得
     ID3D12GraphicsCommandList* cmdList = dxCommon->GetCommandList();
 
-    if (playscene==2)
-    {
-       
-    }
-
-    if (playscene == 3)
-    {
-       
-    }
     
      //スプライト描画前処理
      spriteCommon->PreDraw();
@@ -189,18 +216,11 @@ void GameScene::Draw()
 
      if (playscene == 1)
      {
-        
-     }
-     if (playscene == 2)
-     {
-         
+         bunsup->Draw(cmdList);
+         bunsdown->Draw(cmdList);
      }
 
-     if (playscene == 3)
-     {
-        
-     }
-    
+     floor->Draw(cmdList);
 
     // デバッグテキスト描画
     //debugText->DrawAll();

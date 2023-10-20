@@ -33,9 +33,9 @@ float4 main(VSOutput input) : SV_TARGET
 	Tex.b = tex0.Sample(smp, samplePoint).b;
 
 	//ビネット
-	float vignette = length(float2(0.5, 0.5) - input.uv);
+	/*float vignette = length(float2(0.5, 0.5) - input.uv);
 	vignette = clamp(vignette - 0.35, 0, 1);
-	Tex.rgb -= vignette;
+	Tex.rgb -= vignette;*/
 	
 	float4 color = Tex;
 

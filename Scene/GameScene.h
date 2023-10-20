@@ -23,13 +23,15 @@
 #include "../3d/Modelfbx.h"
 
 #include "../Engine/Camera.h"
-#include"../Collider/PlayerCol.h"
 
 #include <memory>
 #include <list>
 
 #include"BaseScene.h"
 #include"TransEffect.h"
+
+#include"../Collider/BoxCollider.h"
+#include"../Collider/SphereCollider.h"
 
 
 
@@ -84,15 +86,25 @@ private://メンバ変数
 	float transcount = 0;
 	bool transscene = false;
 	
-
 	bool transfrag = true;
 	bool playflag = false;
 	float spriteangle = 0;
 	bool overfrag = true;
 	int wait = 0;
-	
+
+	//3d関連
+	//バンズ用
+	FbxModel* bunsmodel = nullptr;//モデル
+	FBXobj3d* bunsup = nullptr;//上のバンズ
+	FBXobj3d* bunsdown = nullptr;//下のバンズ
+
+	XMVECTOR upVel = { 0.0f,0.0f,0.0f };
+	XMVECTOR downVel = { 0.0f,0.0f,0.0f };
+
+	FbxModel* modelfloor = nullptr;
 	FBXobj3d* floor = nullptr;
-	FBXobj3d* floor2 = nullptr;	
+
+	
 
 	///カメラ関連
 	//ひとつ前のマウスの座標

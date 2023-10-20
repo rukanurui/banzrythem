@@ -151,7 +151,7 @@ void FBXobj3d::CreateGraphicsPipeline()
 	gpipeline.SampleMask = D3D12_DEFAULT_SAMPLE_MASK; // 標準設定
 	// ラスタライザステート
 	gpipeline.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
-	//gpipeline.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
+	gpipeline.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
 	//gpipeline.RasterizerState.FillMode = D3D12_FILL_MODE_WIREFRAME;
 	// デプスステンシルステート
 	gpipeline.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
@@ -397,4 +397,15 @@ void FBXobj3d::SetCollider(BaseCollider* collider)
 	matWorld *= matTrans; // ワールド行列に平行移動を反映
 	//コライダーを更新しておく
 	collider->Update();
+}
+
+void FBXobj3d::MoveVector(const XMVECTOR& move)
+{
+	XMFLOAT3 pos_moved = position;
+
+	pos_moved.x += move.m128_f32[0];
+	pos_moved.y += move.m128_f32[1];
+	pos_moved.z += move.m128_f32[2];
+
+	SetPosition(pos_moved);
 }

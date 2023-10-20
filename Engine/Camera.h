@@ -38,7 +38,7 @@ public: // メンバ関数
 	void MoveTarget(const XMVECTOR& move);
 
 	//update前処理
-	void CurrentUpdate(XMFLOAT3 vel);
+	void CurrentUpdate();
 
 	//Getter
 	//ビュー行列関連
