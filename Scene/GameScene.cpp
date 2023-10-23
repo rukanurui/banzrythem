@@ -7,6 +7,8 @@
 #include"../Collider/CollisionColor.h"
 #include"SceneManager.h"
 
+#include"../Collider/SphereCollider.h"
+
 
 using namespace DirectX;
 
@@ -72,19 +74,21 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     bunsmodel = FbxLoader::GetInstance()->LoadModelFromFile("testfbx");
     modelfloor = FbxLoader::GetInstance()->LoadModelFromFile("floor");
 
-    bunsup = new FBXobj3d();
+    bunsup = new Buns(input);
     bunsup->Initialize();
+    bunsdown->BunsInitialize(false);
     bunsup->SetPosition({ 0.0f,5.0f,5.0f });
     bunsup->SetScale({ 0.01f,0.001f,0.01f });
     bunsup->SetModel(bunsmodel);
-    bunsup->SetCollider(new BoxCollider(XMVECTOR{ 0.0f,5.0f,5.0f,0.0f },1.0f));
+    bunsup->SetCollider(new SphereCollider(XMVECTOR{ 3.0f,0.5f,5.0f,0.0f },1.0f));
 
-    bunsdown = new FBXobj3d();
+    bunsdown = new Buns(input);
     bunsdown->Initialize();
+    bunsdown->BunsInitialize(true);
     bunsdown->SetPosition({ 0.0f,2.0f,5.0f });
     bunsdown->SetScale({ 0.01f,0.001f,0.01f });
     bunsdown->SetModel(bunsmodel);
-    bunsdown->SetCollider(new BoxCollider(XMVECTOR{ 0.0f,5.0f,5.0f,0.0f }, 1.0f));
+    bunsdown->SetCollider(new BoxCollider(XMVECTOR{ 3.0f,0.5f,5.0f,0.0f }, 1.0f));
 
     //床
     floor = new FBXobj3d();
@@ -92,7 +96,7 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     floor->SetPosition({ 0.0f,-1.0f,0.0f });
     floor->SetScale({ 1.0f,0.1f,1.0f });
     floor->SetModel(modelfloor);
-    //floor->SetCollider(new BoxCollider(XMVECTOR{ 100.0f,0.7f,100.0f,0 }, 1.0f));
+    floor->SetCollider(new BoxCollider(XMVECTOR{ 100.0f,0.7f,100.0f,0 }, 1.0f));
   
     //背景
 
@@ -112,9 +116,6 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
  
 
     int counter = 0; // アニメーションの経過時間カウンター(アニメーションするfbxの時のみ使用)
-
-    //バンズ
-    buns = new Buns();
 
 }
 
@@ -159,22 +160,12 @@ void GameScene::Update()
         camera->SetmouseY(CurretmouseY);
 
         //更新処理
-        buns->Update();
         bunsup->Update();
         bunsdown->Update();
+        bunsup->BunsUpdate();
+        bunsdown->BunsUpdate();
         floor->Update();
         camera->CurrentUpdate();
-
-      //  if (input->TriggerKey(DIK_SPACE))
-       // {
-       //     upVel.m128_f32[1] = -0.1f;
-       //     downVel.m128_f32[1] = 0.1f;
-          
-       // }
-     
-        bunsup->MoveVector(buns->GetUpVector());
-        bunsdown->MoveVector(buns->GetDownVector());
-        
 
         collisionManager->CheckAllCollisions();
 

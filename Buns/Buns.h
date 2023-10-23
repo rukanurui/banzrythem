@@ -1,19 +1,16 @@
 #pragma once
-#include "../3d/FBXobj3d.h"
+#include "../3d/fbxobj3d.h"
 #include"../Collider/BoxCollider.h"
 
 class Buns : public FBXobj3d
 {
 public:
-	Buns();
-	~Buns();
+	Buns(Input* Input);
 
 	//初期化
-	void BunsInitialize();
+	void BunsInitialize(bool Flag);
 	//更新
 	void BunsUpdate();
-	//描画
-	void Draw();
 	//衝突時コールバック関数
 	void OnCollision(const CollisionInfo& info)override;
 
@@ -27,7 +24,11 @@ private:
 	//ポインタ
 	Input* input = nullptr;
 
+	//上に行くか
+	bool Upflag = false;
+
 	//上と下への速度
+	XMVECTOR Velocity = { 0.0f,0.0f,0.0f };
 	XMVECTOR upVel = { 0.0f,0.0f,0.0f };
 	XMVECTOR downVel = { 0.0f,0.0f,0.0f };
 

@@ -208,7 +208,6 @@ bool Collision::CheckRay2Sphere(const Ray& ray, const Sphere& sphere, float* dis
 	return true;
 }
 
-
 bool Collision::CheckSpere2Triangle(const Sphere& sphere, const Triangle& triangle, DirectX::XMVECTOR* inter)
 {
 	XMVECTOR p;

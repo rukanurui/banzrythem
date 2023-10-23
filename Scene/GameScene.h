@@ -29,9 +29,6 @@
 
 #include"BaseScene.h"
 #include"TransEffect.h"
-
-#include"../Collider/BoxCollider.h"
-#include"../Collider/SphereCollider.h"
 #include"../Buns/Buns.h"
 
 
@@ -97,8 +94,8 @@ private://メンバ変数
 	//3d関連
 	//バンズ用
 	FbxModel* bunsmodel = nullptr;//モデル
-	FBXobj3d* bunsup = nullptr;//上のバンズ
-	FBXobj3d* bunsdown = nullptr;//下のバンズ
+	Buns* bunsup = nullptr;//上のバンズ
+	Buns* bunsdown = nullptr;//下のバンズ
 
 	XMVECTOR upVel = { 0.0f,0.0f,0.0f };
 	XMVECTOR downVel = { 0.0f,0.0f,0.0f };
