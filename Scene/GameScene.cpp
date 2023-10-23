@@ -29,6 +29,7 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     this->audio = audio;
     this->spriteCommon = spritecommon;
     this->Windows = windows;
+   
 
     //カメラ生成
     camera = new Camera(this->input, this->Windows);
@@ -112,6 +113,9 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
 
     int counter = 0; // アニメーションの経過時間カウンター(アニメーションするfbxの時のみ使用)
 
+    //バンズ
+    buns = new Buns();
+
 }
 
 
@@ -155,20 +159,21 @@ void GameScene::Update()
         camera->SetmouseY(CurretmouseY);
 
         //更新処理
+        buns->Update();
         bunsup->Update();
         bunsdown->Update();
         floor->Update();
         camera->CurrentUpdate();
 
-        if (input->TriggerKey(DIK_SPACE))
-        {
-            upVel.m128_f32[1] = -0.1f;
-            downVel.m128_f32[1] = 0.1f;
+      //  if (input->TriggerKey(DIK_SPACE))
+       // {
+       //     upVel.m128_f32[1] = -0.1f;
+       //     downVel.m128_f32[1] = 0.1f;
           
-        }
+       // }
      
-        bunsup->MoveVector(upVel);
-        bunsdown->MoveVector(downVel);
+        bunsup->MoveVector(buns->GetUpVector());
+        bunsdown->MoveVector(buns->GetDownVector());
         
 
         collisionManager->CheckAllCollisions();

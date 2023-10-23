@@ -32,6 +32,7 @@
 
 #include"../Collider/BoxCollider.h"
 #include"../Collider/SphereCollider.h"
+#include"../Buns/Buns.h"
 
 
 
@@ -71,6 +72,7 @@ private://メンバ変数
 	DebugText* debugText;
 	Audio* audio = nullptr;
 	Camera* camera = nullptr;
+	Buns* buns = nullptr;
 	//衝突マネージャー
 	CollisionManager* collisionManager = nullptr;
 

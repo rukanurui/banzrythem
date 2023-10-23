@@ -17,6 +17,12 @@ public:
 	//衝突時コールバック関数
 	void OnCollision(const CollisionInfo& info)override;
 
+	//ゲッター、セッター
+	XMVECTOR GetUpVector() { return upVel; }
+
+	XMVECTOR GetDownVector() { return downVel; }
+
+
 private:
 	//ポインタ
 	Input* input = nullptr;
