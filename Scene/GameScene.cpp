@@ -76,14 +76,14 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     bunsup->SetPosition({ 0.0f,5.0f,5.0f });
     bunsup->SetScale({ 0.01f,0.001f,0.01f });
     bunsup->SetModel(bunsmodel);
-    bunsup->SetCollider(new BoxCollider);
+    bunsup->SetCollider(new BoxCollider(XMVECTOR{ 0.0f,5.0f,5.0f,0.0f },1.0f));
 
     bunsdown = new FBXobj3d();
     bunsdown->Initialize();
     bunsdown->SetPosition({ 0.0f,2.0f,5.0f });
     bunsdown->SetScale({ 0.01f,0.001f,0.01f });
     bunsdown->SetModel(bunsmodel);
-    bunsdown->SetCollider(new BoxCollider);
+    bunsdown->SetCollider(new BoxCollider(XMVECTOR{ 0.0f,5.0f,5.0f,0.0f }, 1.0f));
 
     //床
     floor = new FBXobj3d();
@@ -170,6 +170,10 @@ void GameScene::Update()
         bunsup->MoveVector(upVel);
         bunsdown->MoveVector(downVel);
         
+
+        collisionManager->CheckAllCollisions();
+
+
         //Rキーを押したらリトライ
         if (input->TriggerKey(DIK_R))
         {

@@ -159,6 +159,7 @@
     <ClCompile Include="3d\Modelfbx.cpp" />
     <ClCompile Include="3d\Object3d.cpp" />
     <ClCompile Include="3d\PartManager.cpp" />
+    <ClCompile Include="Buns\Buns.cpp" />
     <ClCompile Include="Collider\BaseCollider.cpp" />
     <ClCompile Include="Collider\BoxCollider.cpp" />
     <ClCompile Include="Collider\ColisionInfo.cpp" />
@@ -301,6 +302,7 @@
     <ClInclude Include="3d\Modelfbx.h" />
     <ClInclude Include="3d\Object3d.h" />
     <ClInclude Include="3d\PartManager.h" />
+    <ClInclude Include="Buns\Buns.h" />
     <ClInclude Include="Collider\BaseCollider.h" />
     <ClInclude Include="Collider\BoxCollider.h" />
     <ClInclude Include="Collider\ColisionInfo.h" />

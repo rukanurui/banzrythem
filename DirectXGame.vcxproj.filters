@@ -46,6 +46,12 @@
     <Filter Include="ソース ファイル\Collider">
       <UniqueIdentifier>{7beb09f0-5b98-4068-9cff-9faea086fc9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Buns">
+      <UniqueIdentifier>{2056f0a0-54cd-4698-a3d9-fb33f4e1cca1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Buns">
+      <UniqueIdentifier>{0acbcfe5-410e-44c0-9101-a00fb14318f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collider\BaseCollider.cpp">
@@ -155,6 +161,9 @@
     </ClCompile>
     <ClCompile Include="2d\Partmanager2d.cpp">
       <Filter>ソース ファイル\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Buns\Buns.cpp">
+      <Filter>ソース ファイル\Buns</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -338,6 +347,9 @@
     </ClInclude>
     <ClInclude Include="Collider\BoxCollider.h">
       <Filter>ヘッダー ファイル\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Buns\Buns.h">
+      <Filter>ヘッダー ファイル\Buns</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
