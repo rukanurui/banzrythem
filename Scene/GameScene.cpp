@@ -76,16 +76,16 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
 
     bunsup = new Buns(input);
     bunsup->Initialize();
-    bunsdown->BunsInitialize(false);
     bunsup->SetPosition({ 0.0f,5.0f,5.0f });
+    bunsdown->BunsInitialize(false);
     bunsup->SetScale({ 0.01f,0.001f,0.01f });
     bunsup->SetModel(bunsmodel);
     bunsup->SetCollider(new SphereCollider(XMVECTOR{ 3.0f,0.5f,5.0f,0.0f },1.0f));
 
     bunsdown = new Buns(input);
     bunsdown->Initialize();
-    bunsdown->BunsInitialize(true);
     bunsdown->SetPosition({ 0.0f,2.0f,5.0f });
+    bunsdown->BunsInitialize(true);
     bunsdown->SetScale({ 0.01f,0.001f,0.01f });
     bunsdown->SetModel(bunsmodel);
     bunsdown->SetCollider(new BoxCollider(XMVECTOR{ 3.0f,0.5f,5.0f,0.0f }, 1.0f));

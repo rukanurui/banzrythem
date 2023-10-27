@@ -27,6 +27,12 @@ private:
 	//è„Ç…çsÇ≠Ç©
 	bool Upflag = false;
 
+	bool Reverse = false;
+
+	bool Push = false;
+
+	XMFLOAT3 OldPosition= { 0.0f,0.0f,0.0f };
+
 	//è„Ç∆â∫Ç÷ÇÃë¨ìx
 	XMVECTOR Velocity = { 0.0f,0.0f,0.0f };
 	XMVECTOR upVel = { 0.0f,0.0f,0.0f };
