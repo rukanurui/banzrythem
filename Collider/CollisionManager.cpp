@@ -38,6 +38,22 @@ void CollisionManager::CheckAllCollisions()
 				}
 			}
 
+			 //‹¤‚ÉŽlŠp
+			 if (colA->GetShapeType() == COLLISIONSHAPE_BOX &&
+				 colB->GetShapeType() == COLLISIONSHAPE_BOX)
+			 {
+
+				 Box* BoxA = dynamic_cast<Box*>(colA);
+				 Box* BoxB = dynamic_cast<Box*>(colB);
+				 DirectX::XMVECTOR inter;
+
+ 				 if (Collision::CheckBox2Box(*BoxA, *BoxB, &inter))
+				 {
+					 colA->OnCollision(CollisionInfo(colB->GetObject3d(), colB, inter));
+					 colB->OnCollision(CollisionInfo(colA->GetObject3d(), colA, inter));
+				 }
+			 }
+
 			 //‹…‚Æ’¼•û‘Ì
 			 if (colA->GetShapeType() == COLLISIONSHAPE_SPHERE &&
 				 colB->GetShapeType() == COLLISIONSHAPE_BOX)

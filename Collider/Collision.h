@@ -23,6 +23,8 @@ public:
 	//球とAABB
 	static bool CheckSphere2Box(const Sphere& sphere, const Box& box, DirectX::XMVECTOR* inter = nullptr,DirectX::XMVECTOR * reject = nullptr);
 
+	//AABBとAABB
+	static bool CheckBox2Box(const Box& box, const Box& box2, DirectX::XMVECTOR* inter = nullptr, DirectX::XMVECTOR* reject = nullptr);
 	/// <summary>
 	/// 球と法線付き三角形の当たり判定
 	/// </summary>

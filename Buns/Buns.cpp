@@ -10,7 +10,7 @@ Buns::Buns(Input* Input)
 
 void Buns::BunsInitialize(bool Frag)
 {
-    OldPosition = position;
+    //OldPosition = position;
     if (Frag == true)
     {
         Upflag = Frag;
@@ -42,7 +42,7 @@ void Buns::BunsUpdate()
     }
     else
     {
-        OldPosition = position;
+       // OldPosition = position;
     }
 
     if (Reverse == true)

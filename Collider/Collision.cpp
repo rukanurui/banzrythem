@@ -109,6 +109,47 @@ bool Collision::CheckSphere2Box(const Sphere& sphere, const Box& box, DirectX::X
 
 }
 
+bool Collision::CheckBox2Box(const Box& box, const Box& box2, DirectX::XMVECTOR* inter, DirectX::XMVECTOR* reject)
+{
+	// 距離を割り出す
+	XMFLOAT3 distance = {
+		box.center.m128_f32[0]- box2.center.m128_f32[0],
+		box.center.m128_f32[1]- box2.center.m128_f32[1],
+		box.center.m128_f32[2]- box2.center.m128_f32[2]
+	};
+
+	//負の値なら正にする
+	if(distance.x<0.0f)
+	{
+		distance.x *= -1.0f;
+	}
+	if (distance.y< 0.0f)
+	{
+		distance.y *= -1.0f;
+	}
+	if (distance.z< 0.0f)
+	{
+		distance.z *= -1.0f;
+	}
+
+	// サイズの和を割り出す
+	XMFLOAT3 size_sum = {
+		((box.maxpos.m128_f32[0]- box.minpos.m128_f32[0]) + (box2.maxpos.m128_f32[0] - box2.minpos.m128_f32[0])) / 2.0f,
+		((box.maxpos.m128_f32[1]- box.minpos.m128_f32[1]) + (box2.maxpos.m128_f32[1] - box2.minpos.m128_f32[1])) / 2.0f,
+		((box.maxpos.m128_f32[2]- box.minpos.m128_f32[2]) + (box2.maxpos.m128_f32[2] - box2.minpos.m128_f32[2])) / 2.0f
+	};
+
+	// 判定(距離 < サイズの合計なら当たり)
+	if (distance.x < size_sum.x &&
+		distance.y < size_sum.y &&
+		distance.z < size_sum.z)
+	{
+		return true;
+	}
+
+	return false;
+}
+
 bool Collision::CheckRay2Plane(const Ray& ray, const Plane& plane, float* distance, DirectX::XMVECTOR* inter)
 {
 	const float epsilon = 1.0e-5f;//誤差吸収用の微小な値
