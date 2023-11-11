@@ -149,5 +149,9 @@ protected://ƒƒ“ƒo•Ï”
 	float angleX = 0.0f;
 	float angleY = 0.0f;
 
+	//ŒÛ“®
+	float TimeRate = 0.0f;
+	size_t startIndex = 1;
+
 };
 

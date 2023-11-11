@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "../Physics.h"
 
 
 using namespace DirectX;
@@ -254,6 +255,7 @@ void Camera::CurrentUpdate()
 		MoveTarget(move);
 
 	}
+
 	
 	if (viewDirtyFlag == true)
 	{
@@ -278,6 +280,50 @@ void Camera::CurrentUpdate()
 
 	}
 
+
+
+	//イベントの視点移動の点
+	std::vector<XMFLOAT3>points;
+
+	//最後と終わりは2つずつ
+	//eyeを基準にdistanceを追加して変化する
+	points = {
+		{eye.x             ,eye.y              ,eye.z             },
+		{eye.x             ,eye.y              ,eye.z             },
+		{eye.x             ,eye.y              ,eye.z + 0.1f      },
+		{eye.x             ,eye.y              ,eye.z             },
+		{eye.x             ,eye.y              ,eye.z             },
+	};
+
+	//時を進める
+	TimeRate += 0.07f;
+
+	//1以上いったら次に進める
+	if (TimeRate >= 1.0f)
+	{
+		if (startIndex < points.size() - 3)
+		{
+			if (startIndex != points.size() - 4)
+			{
+				startIndex += 1;
+			}
+			else
+			{
+				//全てのスプライン曲線を移動したら次のイベント
+				startIndex = 1;
+			}
+			TimeRate -= 1.0f;
+		}
+		else
+		{
+			TimeRate = 1.0f;
+		}
+	}
+
+	//計算した点の座標をtargetの座標に代入
+	XMFLOAT3 Eye_ = Physics::splinePosition(points, startIndex, TimeRate);
+
+	SetEye(Eye_);
 
 	Camera::Update(windows->window_width, windows->window_height);
 

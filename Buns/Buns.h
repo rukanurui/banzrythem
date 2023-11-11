@@ -24,6 +24,8 @@ private:
 	//ポインタ
 	Input* input = nullptr;
 
+	pad* pad_ = nullptr;
+
 	//上に行くか
 	bool Upflag = false;
 

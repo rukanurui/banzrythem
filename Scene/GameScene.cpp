@@ -97,6 +97,9 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     floor->SetScale({ 1.0f,0.1f,1.0f });
     floor->SetModel(modelfloor);
     floor->SetCollider(new BoxCollider(XMVECTOR{ 100.0f,0.7f,100.0f,0 }, 1.0f));
+
+    random_ = new RandomObj();
+    random_->SetBunsModel(bunsmodel);
   
     //”wŒi
 
@@ -160,6 +163,9 @@ void GameScene::Update()
         camera->SetmouseY(CurretmouseY);
 
         //XVˆ—
+        random_->SetBunsPosition({0,0,0});
+        random_->RandomInitialize();
+        random_->RandomUpdate();
         bunsup->Update();
         bunsdown->Update();
         bunsup->BunsUpdate();
@@ -218,6 +224,7 @@ void GameScene::Draw()
      {
          bunsup->Draw(cmdList);
          bunsdown->Draw(cmdList);
+         random_->RandomDraw(cmdList);
      }
 
      floor->Draw(cmdList);

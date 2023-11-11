@@ -20,6 +20,8 @@ void Buns::BunsInitialize(bool Frag)
 
 void Buns::BunsUpdate()
 {
+    //pad_->Update();
+
 
     if (input->TriggerKey(DIK_SPACE)&&Push==false)
     {
@@ -42,7 +44,7 @@ void Buns::BunsUpdate()
     }
     else
     {
-       // OldPosition = position;
+        OldPosition = position;
     }
 
     if (Reverse == true)
@@ -54,6 +56,7 @@ void Buns::BunsUpdate()
          {
              Velocity.m128_f32[1] = 0.0f;
              Reverse = false;
+             Push = false;
          }
     }
 
@@ -62,14 +65,5 @@ void Buns::BunsUpdate()
 
 void Buns::OnCollision(const CollisionInfo& info)
 {
-   // position = OldPosition;
-
     Reverse = true;
-
-   // float Quely = -1.0f;
-   // Velocity *= Quely;
-
-   // MoveVector(Velocity);
-
-    //Update();
 }
