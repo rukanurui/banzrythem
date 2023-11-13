@@ -1,5 +1,5 @@
 #include "Physics.h"
-
+#define Pl 3.14159
 
 template<class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
@@ -49,4 +49,21 @@ XMFLOAT3 Physics::splinePosition(const std::vector<XMFLOAT3>& points, size_t sta
 float Physics::easingOut(const float& start, const float& end, const float t)
 {
 	return start * (1.0f - t * (2 - t)) + end * (t * (2 - t));
+}
+
+float Physics::Angle(float x, float y, float x1, float y1, float z)
+{
+	double ax, ay, bx, by;
+
+	// bx,by 自分の進んでいる方向 ax,ay 本来進むべき方向  
+	bx = cos(z);
+	by = sin(z);
+	ax = (x + x1) - x;
+	ay = (y + y1) - y;
+
+	// 外積を利用し向きを照準側に向ける
+	z += (ax * by - ay * bx < 0.0) ? +Pl / 180 * 8 : -Pl / 180 * 8;
+
+	return z;
+
 }

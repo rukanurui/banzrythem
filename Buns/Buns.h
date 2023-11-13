@@ -2,6 +2,7 @@
 #include "../3d/fbxobj3d.h"
 #include"../Collider/BoxCollider.h"
 
+
 class Buns : public FBXobj3d
 {
 public:
@@ -19,12 +20,12 @@ public:
 
 	XMVECTOR GetDownVector() { return downVel; }
 
+	int GetSand() { return Sandwich; }
+
 
 private:
 	//ポインタ
 	Input* input = nullptr;
-
-	pad* pad_ = nullptr;
 
 	//上に行くか
 	bool Upflag = false;
@@ -33,6 +34,10 @@ private:
 
 	bool Push = false;
 
+	int Sandwich = 0;
+
+	float circle_time = 0.0f;
+
 	XMFLOAT3 OldPosition= { 0.0f,0.0f,0.0f };
 
 	//上と下への速度
@@ -40,4 +45,5 @@ private:
 	XMVECTOR upVel = { 0.0f,0.0f,0.0f };
 	XMVECTOR downVel = { 0.0f,0.0f,0.0f };
 
+	XMVECTOR Accumulation = { 0.0f,0.0f,0.0f };
 };

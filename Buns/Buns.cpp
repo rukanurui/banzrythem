@@ -1,5 +1,5 @@
 #include "Buns.h"
-
+#include "../Physics.h"
 #include"../Collider/CollisionManager.h";
 
 Buns::Buns(Input* Input)
@@ -10,7 +10,7 @@ Buns::Buns(Input* Input)
 
 void Buns::BunsInitialize(bool Frag)
 {
-    //OldPosition = position;
+    
     if (Frag == true)
     {
         Upflag = Frag;
@@ -20,50 +20,122 @@ void Buns::BunsInitialize(bool Frag)
 
 void Buns::BunsUpdate()
 {
-    //pad_->Update();
+    //パッドのポインタ
+    pad* pad_ = nullptr;
+    pad_ = new pad();
 
+    //パッドの更新
+    pad_->Update();
 
-    if (input->TriggerKey(DIK_SPACE)&&Push==false)
+    float dx_pad = 0;
+    float dz_pad = 0;
+
+  
+    downVel.m128_f32[0] = 0;
+    downVel.m128_f32[1] = 0;
+
+    upVel.m128_f32[0] = 0;
+    upVel.m128_f32[1] = 0;
+
+    if ((pad_->state.Gamepad.sThumbLX != 0 || pad_->state.Gamepad.sThumbLY != 0)&&Upflag==false)
     {
+      //  dx_pad = static_cast<FLOAT>(pad_->state.Gamepad.sThumbLX / 32767.0 * (0.1f));
+      //  dz_pad = static_cast<FLOAT>(pad_->state.Gamepad.sThumbLY / 32767.0 * (0.1f));
+
+        downVel.m128_f32[0] =  (static_cast<FLOAT>(pad_->state.Gamepad.sThumbLX / 32767.0 * (0.4f)));
+        downVel.m128_f32[1] =  (static_cast<FLOAT>(pad_->state.Gamepad.sThumbLY / 32767.0 * (0.4f)));
+
         Push = true;
     }
-
-    if (Push == true)
+    else  if ((pad_->state.Gamepad.sThumbLX == 0 && pad_->state.Gamepad.sThumbLY == 0)&& Upflag == false)
     {
-        upVel.m128_f32[1] = 0.1f;
-        downVel.m128_f32[1] = -0.1f;
-
-        if (Upflag == true)
+        if (Push == true)
         {
-            Velocity = upVel;
+            position = OldPosition;
+            Push = false;
         }
         else
         {
-            Velocity = downVel;
+            if (pad_->iPad_leftshoulder == 1)
+            {
+                circle_time -= 1;
+            }
+
+            if (pad_->iPad_rightshoulder == 1)
+            {
+                circle_time += 1;
+            }
+            /*自機の円動き関数*/
+            position.x = sin(circle_time * 0.07) * 1.5f + 0.0f;
+            position.y = cos(circle_time * 0.07) * 1.5f + 3.5f;
         }
+        OldPosition = position;
     }
-    else
+    
+
+    if ((pad_->state.Gamepad.sThumbRX != 0 || pad_->state.Gamepad.sThumbRY != 0) && Upflag == true)
     {
+        upVel.m128_f32[0] = (static_cast<FLOAT>(pad_->state.Gamepad.sThumbRX / 32767.0 * (0.4f)));
+        upVel.m128_f32[1] = (static_cast<FLOAT>(pad_->state.Gamepad.sThumbRY / 32767.0 * (0.4f)));
+
+        Push = true;
+    }
+    else  if ((pad_->state.Gamepad.sThumbRX == 0 && pad_->state.Gamepad.sThumbRY == 0) && Upflag == true)
+    {
+        if (Push == true)
+        {
+            position = OldPosition;
+            Push = false;
+        }
+        else
+        {
+            if (pad_->iPad_leftshoulder == 1 )
+            {
+                circle_time -= 1;
+            }
+
+            if (pad_->iPad_rightshoulder == 1)
+            {
+                circle_time += 1;
+            }
+            /*自機の円動き関数*/
+            position.x = sin(9+circle_time * 0.07) * 1.5f + 0.0f;
+            position.y = cos(9+circle_time * 0.07) * 1.5f + 3.5f;
+        }
         OldPosition = position;
     }
 
-    if (Reverse == true)
-    {
-         float Quely = -1.0f;
-         Velocity *= Quely;
 
-         if (position.x == OldPosition.x && position.y == OldPosition.y)
-         {
-             Velocity.m128_f32[1] = 0.0f;
-             Reverse = false;
-             Push = false;
-         }
+    if (Upflag == true)
+    {
+        Velocity = upVel;
+    }
+    else
+    {
+        Velocity = downVel;
+    }
+    XMFLOAT2 Vector;
+
+    Vector.x = position .x+ Velocity.m128_f32[0];
+    Vector.y = position. y+ Velocity.m128_f32[1];
+
+    //atanで銃身を向ける方向を算出
+    rotation.z = atan2(Vector.x-position.x, Vector.y - position.y) * -60;
+
+    float error_ = 3.0f;
+    if ((position.x >= OldPosition.x + error_ || position.x <= OldPosition.x - error_)
+        || (position.y >= OldPosition.y + error_ || position.y <= OldPosition.y - error_))
+    {
+        Velocity = { 0.0f,0.0f,0.0f };
     }
 
+    
     MoveVector(Velocity);
+
+
 }
 
 void Buns::OnCollision(const CollisionInfo& info)
 {
-    Reverse = true;
+    Sandwich = 1;
 }

@@ -32,6 +32,8 @@ public:
 
 	static float easingOut(const float& start, const float& end, const float t);
 
+	static float Angle(float x, float y, float x1, float y1, float z);
+
 private:
 
 	float acceleration_g = G / 60;//‰Á‘¬“x

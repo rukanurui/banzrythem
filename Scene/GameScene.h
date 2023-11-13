@@ -30,6 +30,7 @@
 #include"BaseScene.h"
 #include"TransEffect.h"
 #include"../Buns/Buns.h"
+#include"../RandomObj.h"
 
 
 
@@ -96,6 +97,8 @@ private://メンバ変数
 	FbxModel* bunsmodel = nullptr;//モデル
 	Buns* bunsup = nullptr;//上のバンズ
 	Buns* bunsdown = nullptr;//下のバンズ
+
+	RandomObj* random_ = nullptr;
 
 	XMVECTOR upVel = { 0.0f,0.0f,0.0f };
 	XMVECTOR downVel = { 0.0f,0.0f,0.0f };

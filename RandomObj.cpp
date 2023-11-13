@@ -39,6 +39,8 @@ void RandomObj::RandomInitialize()
 			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,0.7f,1.0f,0 }, 1.0f));
 			//スケールのサイズ
 			randomObj->SetScale({ 0.01,0.01,0.01 });
+			//OBJの属性
+
 		}
 
 	
@@ -72,14 +74,12 @@ void RandomObj::RandomUpdate()
 		//移動の点
 	    std::vector<XMFLOAT3>points;
 
-		float RandomHalfway_X = rand() % 100 + (-50);
-		float RandomHalfway_Y = rand() % 100 + (-50);
 		//最後と終わりは2つずつ
 		//eyeを基準にdistanceを追加して変化する
 		points = {
 			{0                            ,0                             ,100                            },
             {0                            ,0                             ,100                            },
-            {Obj_->RandomHalfway_X        ,Obj_->RandomHalfway_Y         ,50                             },
+            {0        ,0         ,50                             },
 			{0                            ,0                             ,-2                             },
 			{BunsPosition.x               ,BunsPosition.y                ,BunsPosition.z-2               },
             {BunsPosition.x               ,BunsPosition.y                ,BunsPosition.z-2               },
