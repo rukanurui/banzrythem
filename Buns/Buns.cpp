@@ -10,7 +10,7 @@ Buns::Buns(Input* Input)
 
 void Buns::BunsInitialize(bool Frag)
 {
-    
+   
     if (Frag == true)
     {
         Upflag = Frag;
@@ -20,6 +20,8 @@ void Buns::BunsInitialize(bool Frag)
 
 void Buns::BunsUpdate()
 {
+    Sandwich = 0;
+
     //パッドのポインタ
     pad* pad_ = nullptr;
     pad_ = new pad();
@@ -137,5 +139,17 @@ void Buns::BunsUpdate()
 
 void Buns::OnCollision(const CollisionInfo& info)
 {
-    Sandwich = 1;
+    
+    if (info.collider->color == 2)
+    {
+        Sandwich = 1;
+        IngredientsRotation = info.object->GetRotation();
+        int SandAttribute = 1;
+    }
+   
+}
+
+void Buns::BunsCollisionColorSet()
+{
+    collider->SetColor(COLLISION_COLOR_BUNS);
 }

@@ -81,6 +81,7 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     bunsup->SetScale({ 0.01f,0.001f,0.01f });
     bunsup->SetModel(bunsmodel);
     bunsup->SetCollider(new BoxCollider(XMVECTOR{ 3.0f,0.5f,5.0f,0.0f },1.0f));
+    bunsup->BunsCollisionColorSet();
 
     bunsdown = new Buns(input);
     bunsdown->Initialize();
@@ -89,6 +90,7 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     bunsdown->SetScale({ 0.01f,0.001f,0.01f });
     bunsdown->SetModel(bunsmodel);
     bunsdown->SetCollider(new BoxCollider(XMVECTOR{ 3.0f,0.5f,5.0f,0.0f }, 1.0f));
+    bunsdown->BunsCollisionColorSet();
 
     //è∞
     floor = new FBXobj3d();

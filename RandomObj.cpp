@@ -36,16 +36,22 @@ void RandomObj::RandomInitialize()
 			//ここでモデルの形状をセット
 			randomObj->SetModel(meatmodel);
 			//コリジョンのサイズ登録
-			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,0.7f,1.0f,0 }, 1.0f));
+			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 2.5f,2.5f,2.5f,0 }, 1.0f));
 			//スケールのサイズ
 			randomObj->SetScale({ 0.01,0.01,0.01 });
 			//OBJの属性
+			randomObj->collider->SetColor(COLLISION_COLOR_MEAT);
 
 		}
 
 	
 		//ポジションの初期位置設定
 		randomObj->SetPosition({ 0,0,100 });
+
+		//OBJの回転設定
+		float RandomRotationZ= rand() % 360;
+
+		randomObj->SetRotation({ 0,0,RandomRotationZ });
 
 		randomObj->SetCanGetFlag(true);
 		//コリジョンの属性指定
@@ -77,12 +83,12 @@ void RandomObj::RandomUpdate()
 		//最後と終わりは2つずつ
 		//eyeを基準にdistanceを追加して変化する
 		points = {
-			{0                            ,0                             ,100                            },
-            {0                            ,0                             ,100                            },
-            {0        ,0         ,50                             },
-			{0                            ,0                             ,-2                             },
-			{BunsPosition.x               ,BunsPosition.y                ,BunsPosition.z-2               },
-            {BunsPosition.x               ,BunsPosition.y                ,BunsPosition.z-2               },
+			{0                            ,3.5                             ,100                            },
+            {0                            ,3.5                             ,100                            },
+           // {0        ,0         ,50                             },
+			//{0                            ,0                             ,-2                             },
+			{BunsPosition.x               ,3.5                ,BunsPosition.z-2               },
+            {BunsPosition.x               ,3.5                ,BunsPosition.z-2               },
 		};
 
 		//時を進める

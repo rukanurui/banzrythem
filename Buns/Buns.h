@@ -15,12 +15,18 @@ public:
 	//衝突時コールバック関数
 	void OnCollision(const CollisionInfo& info)override;
 
+	void BunsCollisionColorSet();
+
 	//ゲッター、セッター
 	XMVECTOR GetUpVector() { return upVel; }
 
 	XMVECTOR GetDownVector() { return downVel; }
 
 	int GetSand() { return Sandwich; }
+
+	int GetSandAttribute() { return SandAttribute; }
+
+	XMFLOAT3 GetIngredientsRotation() { return IngredientsRotation; }
 
 
 private:
@@ -35,6 +41,10 @@ private:
 	bool Push = false;
 
 	int Sandwich = 0;
+
+	int SandAttribute = 0;
+
+	XMFLOAT3 IngredientsRotation;
 
 	float circle_time = 0.0f;
 
