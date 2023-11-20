@@ -35,7 +35,7 @@ public:
 	void SetBunsPosition(XMFLOAT3 pos) { BunsPosition = pos; }
 
 	//取れるかのフラグセット
-	void SetCanGetFlag(bool flag) { CanGet = flag; }
+
 
 	//モデルセット
 	//バンズモデル
@@ -53,8 +53,7 @@ private:
 
 	float CreateObjTime = 0.0f;
 
-	bool CanGet = false;
-
+	
 	size_t startIndex = 1;
 
 	XMFLOAT3 BunsPosition;

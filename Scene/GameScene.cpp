@@ -80,7 +80,7 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     bunsdown->BunsInitialize(false);
     bunsup->SetScale({ 0.01f,0.001f,0.01f });
     bunsup->SetModel(bunsmodel);
-    bunsup->SetCollider(new BoxCollider(XMVECTOR{ 3.0f,0.5f,5.0f,0.0f },1.0f));
+    bunsup->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,0.5f,2.0f,0.0f },1.0f));
     bunsup->BunsCollisionColorSet();
 
     bunsdown = new Buns(input);
@@ -89,7 +89,7 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     bunsdown->BunsInitialize(true);
     bunsdown->SetScale({ 0.01f,0.001f,0.01f });
     bunsdown->SetModel(bunsmodel);
-    bunsdown->SetCollider(new BoxCollider(XMVECTOR{ 3.0f,0.5f,5.0f,0.0f }, 1.0f));
+    bunsdown->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,0.5f,2.0f,0.0f }, 1.0f));
     bunsdown->BunsCollisionColorSet();
 
     //床
@@ -102,7 +102,9 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
 
     random_ = new RandomObj();
     random_->SetBunsModel(bunsmodel);
-  
+
+    score_ = new ScoreManager();
+
     //背景
 
     //プレイヤー関連処理
@@ -122,6 +124,14 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
 
     int counter = 0; // アニメーションの経過時間カウンター(アニメーションするfbxの時のみ使用)
 
+
+    //デバックテキスト
+    debugText = new DebugText();
+
+    const int debugTextTexNumber = 2;
+
+    spriteCommon->LoadTexture(debugTextTexNumber, L"Resources/ASC_white1280.png");
+    debugText->Initialize(spriteCommon, debugTextTexNumber);
 }
 
 
@@ -154,6 +164,7 @@ void GameScene::Update()
     //ゲーム本編
     if (transscene == true)
     {
+        
 
         // マウスの入力を取得
         Input::MouseMove mouseMove = input->GetMouseMove();
@@ -163,6 +174,10 @@ void GameScene::Update()
 
         camera->SetmouseX(CurretmouseX);
         camera->SetmouseY(CurretmouseY);
+
+        camera->SetTarget({ 0.0f,3.8f,2.5f });
+
+       
 
         //更新処理
         random_->SetBunsPosition({0,0,0});
@@ -177,6 +192,12 @@ void GameScene::Update()
 
         collisionManager->CheckAllCollisions();
 
+        //セット処理
+        score_->AddSandPoint(bunsup->GetSand());
+        score_->AddSandPoint(bunsdown->GetSand());
+        score_->SetSandType(bunsup->GetSandAttribute());
+
+        score_->Update();
 
         //Rキーを押したらリトライ
         if (input->TriggerKey(DIK_R))
@@ -224,15 +245,21 @@ void GameScene::Draw()
 
      if (playscene == 1)
      {
+
          bunsup->Draw(cmdList);
          bunsdown->Draw(cmdList);
          random_->RandomDraw(cmdList);
+
+
+         // デバッグテキスト描画
+         sprintf_s(moji, "%d", score_->GetScore());
+         debugText->Print(moji, 100, 100);
+         debugText->DrawAll();
      }
 
-     floor->Draw(cmdList);
+   //  floor->Draw(cmdList);
 
-    // デバッグテキスト描画
-    //debugText->DrawAll();
+ 
 }
 
 

@@ -36,9 +36,9 @@ void RandomObj::RandomInitialize()
 			//ここでモデルの形状をセット
 			randomObj->SetModel(meatmodel);
 			//コリジョンのサイズ登録
-			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 2.5f,2.5f,2.5f,0 }, 1.0f));
+			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,1.0f,2.5f,0 }, 1.0f));
 			//スケールのサイズ
-			randomObj->SetScale({ 0.01,0.01,0.01 });
+			randomObj->SetScale({ 0.005f,0.001f,0.005f });
 			//OBJの属性
 			randomObj->collider->SetColor(COLLISION_COLOR_MEAT);
 
@@ -49,7 +49,10 @@ void RandomObj::RandomInitialize()
 		randomObj->SetPosition({ 0,0,100 });
 
 		//OBJの回転設定
-		float RandomRotationZ= rand() % 360;
+		float RandomRotationZ= rand()%90+(-45);
+
+	//	float RandomRotationZ = rand() % 45 + (-45);
+
 
 		randomObj->SetRotation({ 0,0,RandomRotationZ });
 
@@ -68,7 +71,7 @@ void RandomObj::RandomDraw(ID3D12GraphicsCommandList* cmdList)
 {
 	//描画する
 	for (std::unique_ptr<RandomObj>& Obj_ : Objs) {
-		Obj_->Draw(cmdList);
+		if(Obj_->GetCanGetFlag()==true)Obj_->Draw(cmdList);
 	}
 }
 
@@ -87,12 +90,14 @@ void RandomObj::RandomUpdate()
             {0                            ,3.5                             ,100                            },
            // {0        ,0         ,50                             },
 			//{0                            ,0                             ,-2                             },
-			{BunsPosition.x               ,3.5                ,BunsPosition.z-2               },
-            {BunsPosition.x               ,3.5                ,BunsPosition.z-2               },
+			{BunsPosition.x               ,3.5                ,4.0f               },
+            {BunsPosition.x               ,3.5                ,4.0f               },
 		};
 
 		//時を進める
 		Obj_->TimeRate += 0.01f;
+
+		bool LostFlag = false;
 
 		//1以上いったら次に進める
 		if (Obj_->TimeRate >= 1.0f)
@@ -116,6 +121,12 @@ void RandomObj::RandomUpdate()
 			else
 			{
 				Obj_->TimeRate = 1.0f;
+
+				Obj_->SetCanGetFlag(false);
+
+				LostFlag = true;
+
+				
 			}
 		}
 
@@ -125,8 +136,6 @@ void RandomObj::RandomUpdate()
 		Obj_->SetPosition(Eye_);
 
 		Obj_->Update();
-
-
 
 	}
 

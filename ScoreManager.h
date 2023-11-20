@@ -19,24 +19,27 @@ public:
 
 	void AddSandPoint(int point) { SandPoint += point; }
 
+	void SetSandType(int type) { SandType = type; }
+
 	void SetIngredientsRotation(XMFLOAT3 rotation) { IngredientsRotation = rotation; }
 	void SetBunsUpRotation(XMFLOAT3 rotation) { BunsUpRotation = rotation; }
 	void SetBunsDownRotation(XMFLOAT3 rotation) { BunsDownRotation = rotation; }
 
 
+	//getter
+	int GetScore() { return Score; }
 private:
 
 	int Score = 0;
 
 	int SandPoint = 0;
 
+	int SandType = 0;
+
 	XMFLOAT3 IngredientsRotation = {0,0,0};
 
 	XMFLOAT3 BunsUpRotation = { 0,0,0 };
 
 	XMFLOAT3 BunsDownRotation = { 0,0,0 };
-
-
-
 };
 

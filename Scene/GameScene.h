@@ -31,6 +31,7 @@
 #include"TransEffect.h"
 #include"../Buns/Buns.h"
 #include"../RandomObj.h"
+#include"../ScoreManager.h"
 
 
 
@@ -99,6 +100,10 @@ private://ƒƒ“ƒo•Ï”
 	Buns* bunsdown = nullptr;//‰º‚Ìƒoƒ“ƒY
 
 	RandomObj* random_ = nullptr;
+	ScoreManager* score_ = nullptr;
+
+	char moji[64];
+
 
 	XMVECTOR upVel = { 0.0f,0.0f,0.0f };
 	XMVECTOR downVel = { 0.0f,0.0f,0.0f };

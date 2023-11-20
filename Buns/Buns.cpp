@@ -68,8 +68,8 @@ void Buns::BunsUpdate()
                 circle_time += 1;
             }
             /*Ž©‹@‚Ì‰~“®‚«ŠÖ”*/
-            position.x = sin(circle_time * 0.07) * 1.5f + 0.0f;
-            position.y = cos(circle_time * 0.07) * 1.5f + 3.5f;
+            position.x = sin(circle_time * 0.07) * 2.5f + 0.0f;
+            position.y = cos(circle_time * 0.07) * 2.5f + 3.5f;
         }
         OldPosition = position;
     }
@@ -101,8 +101,8 @@ void Buns::BunsUpdate()
                 circle_time += 1;
             }
             /*Ž©‹@‚Ì‰~“®‚«ŠÖ”*/
-            position.x = sin(9+circle_time * 0.07) * 1.5f + 0.0f;
-            position.y = cos(9+circle_time * 0.07) * 1.5f + 3.5f;
+            position.x = sin(9+circle_time * 0.07) * 2.5f + 0.0f;
+            position.y = cos(9+circle_time * 0.07) * 2.5f + 3.5f;
         }
         OldPosition = position;
     }
@@ -139,12 +139,37 @@ void Buns::BunsUpdate()
 
 void Buns::OnCollision(const CollisionInfo& info)
 {
-    
-    if (info.collider->color == 2)
+    float Halfhalf = 90.0f;
+    float error = 10.0f;
+
+    if (Upflag == true)
     {
-        Sandwich = 1;
-        IngredientsRotation = info.object->GetRotation();
-        int SandAttribute = 1;
+
+        if (info.collider->color == 2 && info.object->GetCanGetFlag() == true)
+        {
+
+            IngredientsRotation = info.object->GetRotation();
+
+            if (rotation.z +error>= IngredientsRotation.z && rotation.z-error  <= IngredientsRotation.z)
+            {
+                SandAttribute = 1;
+                Sandwich = 1;
+            }
+        }
+    }
+    else if (Upflag == false)
+    {
+        if (info.collider->color == 2 && info.object->GetCanGetFlag() == true)
+        {
+
+            IngredientsRotation = info.object->GetRotation();
+
+            if (rotation.z+error-180>= IngredientsRotation.z && rotation.z-error-180  <= IngredientsRotation.z)
+            {
+                SandAttribute = 1;
+                Sandwich = 1;
+            }
+        }
     }
    
 }

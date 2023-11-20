@@ -102,6 +102,9 @@ public://メンバ関数
 	//ベクトルによる座標移動
 	void MoveVector(const XMVECTOR& move);
 
+	void SetCanGetFlag(bool flag) { CanGet = flag; }
+	bool GetCanGetFlag() { return CanGet; }
+
 protected://メンバ変数
 	//定数バッファ
 	ComPtr<ID3D12Resource> constBufferTransform;
@@ -119,6 +122,7 @@ protected://メンバ変数
 	//モデル
 	FbxModel* fbxmodel = nullptr;
 
+	bool CanGet = false;
 	//デバイス
 	static ID3D12Device* device;
 	//カメラ

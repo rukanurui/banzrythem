@@ -2,13 +2,13 @@
 
 void ScoreManager::Update()
 {
-	float error = 10.0f;
+	//‹ïŞ•Ê
+
 	//“ñ‚Â‚Æ‚à‹²‚ñ‚Å‚¢‚Ä
 	if (SandPoint == 2)
 	{
-		//Œë·Œ—“à‚È‚ç
-		if ((IngredientsRotation.z <= BunsDownRotation.z + error && IngredientsRotation.z >= BunsDownRotation.z - error)&&
-			(IngredientsRotation.z <= BunsUpRotation.z + error && IngredientsRotation.z >= BunsUpRotation.z - error))
+
+		if (SandType == 1)
 		{
 			Score += 1;
 		}
