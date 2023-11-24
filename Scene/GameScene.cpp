@@ -71,26 +71,65 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     //FBXパイプライン生成
     FBXobj3d::CreateGraphicsPipeline();
 
-    bunsmodel = FbxLoader::GetInstance()->LoadModelFromFile("testfbx");
+    //モデル読み込み
+    bunsmodel1 = FbxLoader::GetInstance()->LoadModelFromFile("banzu1");
+    bunsmodel2 = FbxLoader::GetInstance()->LoadModelFromFile("banzu2");
+    bunsmodel3 = FbxLoader::GetInstance()->LoadModelFromFile("banzu3");
+    meatmodel = FbxLoader::GetInstance()->LoadModelFromFile("humbergu");
+    cheasemodel = FbxLoader::GetInstance()->LoadModelFromFile("ti-zu");
+    tomatomodel1 = FbxLoader::GetInstance()->LoadModelFromFile("tomato1");
+    tomatomodel2 = FbxLoader::GetInstance()->LoadModelFromFile("tomato2");
+    tomatomodel3 = FbxLoader::GetInstance()->LoadModelFromFile("tomato3");
+    tomatomodel4 = FbxLoader::GetInstance()->LoadModelFromFile("tomato4");
+    retasumodel1 = FbxLoader::GetInstance()->LoadModelFromFile("retasu1");
+    retasumodel2 = FbxLoader::GetInstance()->LoadModelFromFile("retasu2");
+    soxmodel = FbxLoader::GetInstance()->LoadModelFromFile("kutusita");
     modelfloor = FbxLoader::GetInstance()->LoadModelFromFile("floor");
+
+
 
     bunsup = new Buns(input);
     bunsup->Initialize();
     bunsup->SetPosition({ 0.0f,5.0f,5.0f });
-    bunsdown->BunsInitialize(false);
+    bunsup->BunsInitialize(false);
     bunsup->SetScale({ 0.01f,0.001f,0.01f });
-    bunsup->SetModel(bunsmodel);
+    bunsup->SetModel(bunsmodel1);
     bunsup->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,0.5f,2.0f,0.0f },1.0f));
     bunsup->BunsCollisionColorSet();
+
+    bunsup2 = new FBXobj3d();
+    bunsup2->Initialize();
+    bunsup2->SetPosition({ 0.0f,5.0f,5.0f });
+    bunsup2->SetScale({ 0.01f,0.001f,0.01f });
+    bunsup2->SetModel(bunsmodel2);
+
+    bunsup3 = new FBXobj3d();
+    bunsup3->Initialize();
+    bunsup3->SetPosition({ 0.0f,5.0f,5.0f });
+    bunsup3->SetScale({ 0.01f,0.001f,0.01f });
+    bunsup3->SetModel(bunsmodel3);
 
     bunsdown = new Buns(input);
     bunsdown->Initialize();
     bunsdown->SetPosition({ 0.0f,2.0f,5.0f });
     bunsdown->BunsInitialize(true);
     bunsdown->SetScale({ 0.01f,0.001f,0.01f });
-    bunsdown->SetModel(bunsmodel);
+    bunsdown->SetModel(bunsmodel1);
     bunsdown->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,0.5f,2.0f,0.0f }, 1.0f));
     bunsdown->BunsCollisionColorSet();
+
+    bunsdown2 = new FBXobj3d();
+    bunsdown2->Initialize();
+    bunsdown2->SetPosition({ 0.0f,2.0f,5.0f });
+    bunsdown2->SetScale({ 0.01f,0.001f,0.01f });
+    bunsdown2->SetModel(bunsmodel2);
+
+    bunsdown3 = new FBXobj3d();
+    bunsdown3->Initialize();
+    bunsdown3->SetPosition({ 0.0f,2.0f,5.0f });
+    bunsdown3->SetScale({ 0.01f,0.001f,0.01f });
+    bunsdown3->SetModel(bunsmodel3);
+
 
     //床
     floor = new FBXobj3d();
@@ -101,7 +140,7 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     floor->SetCollider(new BoxCollider(XMVECTOR{ 100.0f,0.7f,100.0f,0 }, 1.0f));
 
     random_ = new RandomObj();
-    random_->SetBunsModel(bunsmodel);
+    random_->SetmeatModel(meatmodel);
 
     score_ = new ScoreManager();
 
@@ -184,7 +223,11 @@ void GameScene::Update()
         random_->RandomInitialize();
         random_->RandomUpdate();
         bunsup->Update();
+        bunsup2->Update();
+        bunsup3->Update();
         bunsdown->Update();
+        bunsdown2->Update();
+        bunsdown3->Update();
         bunsup->BunsUpdate();
         bunsdown->BunsUpdate();
         floor->Update();
@@ -250,7 +293,11 @@ void GameScene::Draw()
      {
 
          bunsup->Draw(cmdList);
+         bunsup2->Draw(cmdList);
+         bunsup3->Draw(cmdList);
          bunsdown->Draw(cmdList);
+         bunsdown2->Draw(cmdList);
+         bunsdown3->Draw(cmdList);
          random_->RandomDraw(cmdList);
 
 

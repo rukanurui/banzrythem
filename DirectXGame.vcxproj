@@ -178,6 +178,8 @@
     <ClCompile Include="Engine\main.cpp" />
     <ClCompile Include="Engine\pad.cpp" />
     <ClCompile Include="Engine\WindowsApp.cpp" />
+    <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="RandomObj.cpp" />
     <ClCompile Include="Scene\BaseScene.cpp" />
     <ClCompile Include="Scene\ClearScene.cpp" />
     <ClCompile Include="Scene\GameoverScene.cpp" />
@@ -185,6 +187,7 @@
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
     <ClCompile Include="Scene\TransEffect.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\BasicPS.hlsl">
@@ -321,6 +324,8 @@
     <ClInclude Include="Engine\Input.h" />
     <ClInclude Include="Engine\pad.h" />
     <ClInclude Include="Engine\WindowsApp.h" />
+    <ClInclude Include="Physics.h" />
+    <ClInclude Include="RandomObj.h" />
     <ClInclude Include="Scene\BaseScene.h" />
     <ClInclude Include="Scene\ClearScene.h" />
     <ClInclude Include="Scene\GameoverScene.h" />
@@ -328,6 +333,7 @@
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="Scene\TitleScene.h" />
     <ClInclude Include="Scene\TransEffect.h" />
+    <ClInclude Include="ScoreManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="DirectXTex\DirectXTex_Desktop_2019_Win10.vcxproj">

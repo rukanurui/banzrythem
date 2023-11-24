@@ -86,15 +86,6 @@ void TitleScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Spri
 void TitleScene::Update()
 {
 
-    //// ƒ}ƒEƒX‚Ì“ü—Í‚ðŽæ“¾
-    //Input::MouseMove mouseMove = input->GetMouseMove();
-
-    //CurretmouseX = mouseMove.lX;
-    //CurretmouseY = mouseMove.lY;
-
-    //camera->SetmouseX(CurretmouseX);
-    //camera->SetmouseY(CurretmouseY);
-
     camera->CurrentUpdate();
 
     if (titleflag == true)
@@ -108,7 +99,7 @@ void TitleScene::Update()
             transfrag = false;
         }
 
-        if (transfrag == true)
+        if (transfrag == true)  
         {
             spritesize.x -= 1.0f;
             spritesize.y -= 1.0f;

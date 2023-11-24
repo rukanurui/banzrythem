@@ -38,8 +38,11 @@ public:
 
 
 	//モデルセット
-	//バンズモデル
-	void SetBunsModel(FbxModel* model) { meatmodel = model; }
+	//肉モデル
+	void SetmeatModel(FbxModel* model) { meatmodel = model; }
+
+	//void SetcheseModel(FbxModel* model) { chesemodel = model; }
+
 
 
 private:

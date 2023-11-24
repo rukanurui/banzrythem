@@ -94,10 +94,28 @@ private://メンバ変数
 	int wait = 0;
 
 	//3d関連
+	//モデル
+	FbxModel* bunsmodel1 = nullptr;//バンズモデル1
+	FbxModel* bunsmodel2 = nullptr;//バンズモデル2
+	FbxModel* bunsmodel3 = nullptr;//バンズモデル3
+	FbxModel* meatmodel = nullptr;//肉モデル
+	FbxModel* cheasemodel = nullptr;//チーズモデル
+	FbxModel* soxmodel = nullptr;//靴下モデル
+	FbxModel* tomatomodel1 = nullptr;//トマトモデル1
+	FbxModel* tomatomodel2 = nullptr;//トマトモデル2
+	FbxModel* tomatomodel3 = nullptr;//トマトモデル3
+	FbxModel* tomatomodel4 = nullptr;//トマトモデル4
+	FbxModel* retasumodel1 = nullptr;//レタスモデル1
+	FbxModel* retasumodel2 = nullptr;//レタスモデル2
+
 	//バンズ用
-	FbxModel* bunsmodel = nullptr;//モデル
 	Buns* bunsup = nullptr;//上のバンズ
+	FBXobj3d* bunsup2 = nullptr;//上のバンズ2
+	FBXobj3d* bunsup3 = nullptr;//上のバンズ3
 	Buns* bunsdown = nullptr;//下のバンズ
+	FBXobj3d* bunsdown2 = nullptr;//下のバンズ2
+	FBXobj3d* bunsdown3 = nullptr;//下のバンズ3
+
 
 	RandomObj* random_ = nullptr;
 	ScoreManager* score_ = nullptr;
