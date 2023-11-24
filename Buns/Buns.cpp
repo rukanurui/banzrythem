@@ -169,6 +169,50 @@ void Buns::OnCollision(const CollisionInfo& info)
                 Sandwich = true;
             }
         }
+        else  if (info.collider->color == 4 && info.object->GetCanGetFlag() == true)
+        {
+
+            IngredientsRotation = info.object->GetRotation();
+
+            if (rotation.z + error >= IngredientsRotation.z && rotation.z - error <= IngredientsRotation.z)
+            {
+                SandAttribute = 2;
+                Sandwich = true;
+            }
+        }
+        else if (info.collider->color == 8 && info.object->GetCanGetFlag() == true)
+        {
+
+            IngredientsRotation = info.object->GetRotation();
+
+            if (rotation.z + error >= IngredientsRotation.z && rotation.z - error <= IngredientsRotation.z)
+            {
+                SandAttribute = 3;
+                Sandwich = true;
+            }
+        }
+        else if (info.collider->color == 16 && info.object->GetCanGetFlag() == true)
+        {
+
+            IngredientsRotation = info.object->GetRotation();
+
+            if (rotation.z + error >= IngredientsRotation.z && rotation.z - error <= IngredientsRotation.z)
+            {
+                SandAttribute = 4;
+                Sandwich = true;
+            }
+        }
+        else  if (info.collider->color == 32 && info.object->GetCanGetFlag() == true)
+        {
+
+            IngredientsRotation = info.object->GetRotation();
+
+            if (rotation.z + error >= IngredientsRotation.z && rotation.z - error <= IngredientsRotation.z)
+            {
+                SandAttribute = 5;
+                Sandwich = true;
+            }
+        }
     }
     else if (Upflag == false)
     {
@@ -180,6 +224,50 @@ void Buns::OnCollision(const CollisionInfo& info)
             if (rotation.z+error-180>= IngredientsRotation.z && rotation.z-error-180  <= IngredientsRotation.z)
             {
                 SandAttribute = 1;
+                Sandwich = true;
+            }
+        }
+        else  if (info.collider->color == 4 && info.object->GetCanGetFlag() == true)
+        {
+
+            IngredientsRotation = info.object->GetRotation();
+
+            if (rotation.z + error >= IngredientsRotation.z && rotation.z - error <= IngredientsRotation.z)
+            {
+                SandAttribute = 2;
+                Sandwich = true;
+            }
+        }
+        else if (info.collider->color == 8 && info.object->GetCanGetFlag() == true)
+        {
+
+            IngredientsRotation = info.object->GetRotation();
+
+            if (rotation.z + error >= IngredientsRotation.z && rotation.z - error <= IngredientsRotation.z)
+            {
+                SandAttribute = 3;
+                Sandwich = true;
+            }
+        }
+        else if (info.collider->color == 16 && info.object->GetCanGetFlag() == true)
+        {
+
+            IngredientsRotation = info.object->GetRotation();
+
+            if (rotation.z + error >= IngredientsRotation.z && rotation.z - error <= IngredientsRotation.z)
+            {
+                SandAttribute = 4;
+                Sandwich = true;
+            }
+        }
+        else  if (info.collider->color == 32 && info.object->GetCanGetFlag() == true)
+        {
+
+            IngredientsRotation = info.object->GetRotation();
+
+            if (rotation.z + error >= IngredientsRotation.z && rotation.z - error <= IngredientsRotation.z)
+            {
+                SandAttribute = 5;
                 Sandwich = true;
             }
         }

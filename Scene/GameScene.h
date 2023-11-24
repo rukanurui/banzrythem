@@ -115,7 +115,10 @@ private://メンバ変数
 	Buns* bunsdown = nullptr;//下のバンズ
 	FBXobj3d* bunsdown2 = nullptr;//下のバンズ2
 	FBXobj3d* bunsdown3 = nullptr;//下のバンズ3
-
+	FBXobj3d* tomato2 = nullptr;//トマト2
+	FBXobj3d* tomato3 = nullptr;//トマト3
+	FBXobj3d* tomato4 = nullptr;//トマト4
+	FBXobj3d* retasu2 = nullptr;//レタス2
 
 	RandomObj* random_ = nullptr;
 	ScoreManager* score_ = nullptr;

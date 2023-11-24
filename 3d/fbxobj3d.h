@@ -66,6 +66,7 @@ public://メンバ関数
 	//getter
 	//ワールド行列のゲッター
 	const XMMATRIX& GetMatWorld() { return matWorld; }
+	void SetMatWorld(XMMATRIX World) { this->matWorld = World; }
 
 	const XMFLOAT3& GetPos() { return position; }
 	const float& GetPosX() { return position.x; }

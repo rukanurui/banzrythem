@@ -40,9 +40,15 @@ public:
 	//モデルセット
 	//肉モデル
 	void SetmeatModel(FbxModel* model) { meatmodel = model; }
+	void SettomatoModel(FbxModel* model) { tomatomodel = model; }
+	void SetretasuModel(FbxModel* model) { retasumodel = model; }
+	void SettirzuModel(FbxModel* model) { tirzumodel = model; }
+	void SetkutusitaModel(FbxModel* model) { kutusitamodel = model; }
 
 	//void SetcheseModel(FbxModel* model) { chesemodel = model; }
 
+	//ナンバーのGetter
+	const int& GetRandomNumber() { return RandomNumber; }
 
 
 private:
@@ -68,5 +74,10 @@ private:
 
 	//オブジェクトのモデルポインタ
 	FbxModel* meatmodel = nullptr;//モデル
+	FbxModel* tomatomodel = nullptr;//モデル
+	FbxModel* retasumodel = nullptr;//モデル
+	FbxModel* tirzumodel = nullptr;//モデル
+	FbxModel* kutusitamodel = nullptr;//モデル
+
 };
 

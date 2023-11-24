@@ -33,7 +33,7 @@ void PartManager::PartInitialize(XMFLOAT3 pos)
 	}
 
 	//コライダーの属性設定
-	collider->SetColor(COLLISION_COLOR_PART);
+	//collider->SetColor(COLLISION_COLOR_PART);
 }
 
 void PartManager::BullisticInitialize(XMFLOAT3& pos,XMVECTOR& Velocity,XMFLOAT3& angle)
@@ -51,7 +51,7 @@ void PartManager::BullisticInitialize(XMFLOAT3& pos,XMVECTOR& Velocity,XMFLOAT3&
 	rotation.x = angle.x * -reverveangle;
 	
 	//コライダーの属性設定
-	collider->SetColor(COLLISION_COLOR_PART);
+	//collider->SetColor(COLLISION_COLOR_PART);
 }
 
 void PartManager::BullisticInitializeEnemy(XMFLOAT3& pos, XMVECTOR& Velocity, XMFLOAT3& angle, int& num)
@@ -71,7 +71,7 @@ void PartManager::BullisticInitializeEnemy(XMFLOAT3& pos, XMVECTOR& Velocity, XM
 	//rotation.x = angle.x * -55;
 
 	//コライダーの属性設定
-	collider->SetColor(COLLISION_COLOR_PART);
+	//collider->SetColor(COLLISION_COLOR_PART);
 }
 
 void PartManager::OnCollision(const CollisionInfo& info)

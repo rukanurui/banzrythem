@@ -90,9 +90,9 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
 
     bunsup = new Buns(input);
     bunsup->Initialize();
-    bunsup->SetPosition({ 0.0f,5.0f,5.0f });
+    bunsup->SetPosition({ 0.0f,4.0f,5.0f });
     bunsup->BunsInitialize(false);
-    bunsup->SetScale({ 0.01f,0.001f,0.01f });
+    bunsup->SetScale({ 0.01f,0.01f,0.01f });
     bunsup->SetModel(bunsmodel1);
     bunsup->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,0.5f,2.0f,0.0f },1.0f));
     bunsup->BunsCollisionColorSet();
@@ -100,20 +100,20 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     bunsup2 = new FBXobj3d();
     bunsup2->Initialize();
     bunsup2->SetPosition({ 0.0f,5.0f,5.0f });
-    bunsup2->SetScale({ 0.01f,0.001f,0.01f });
+    bunsup2->SetScale({ 0.01f,0.01f,0.01f });
     bunsup2->SetModel(bunsmodel2);
 
     bunsup3 = new FBXobj3d();
     bunsup3->Initialize();
     bunsup3->SetPosition({ 0.0f,5.0f,5.0f });
-    bunsup3->SetScale({ 0.01f,0.001f,0.01f });
+    bunsup3->SetScale({ 0.01f,0.01f,0.01f });
     bunsup3->SetModel(bunsmodel3);
 
     bunsdown = new Buns(input);
     bunsdown->Initialize();
     bunsdown->SetPosition({ 0.0f,2.0f,5.0f });
     bunsdown->BunsInitialize(true);
-    bunsdown->SetScale({ 0.01f,0.001f,0.01f });
+    bunsdown->SetScale({ 0.01f,0.01f,0.01f });
     bunsdown->SetModel(bunsmodel1);
     bunsdown->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,0.5f,2.0f,0.0f }, 1.0f));
     bunsdown->BunsCollisionColorSet();
@@ -121,13 +121,13 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     bunsdown2 = new FBXobj3d();
     bunsdown2->Initialize();
     bunsdown2->SetPosition({ 0.0f,2.0f,5.0f });
-    bunsdown2->SetScale({ 0.01f,0.001f,0.01f });
+    bunsdown2->SetScale({ 0.01f,0.01f,0.01f });
     bunsdown2->SetModel(bunsmodel2);
 
     bunsdown3 = new FBXobj3d();
     bunsdown3->Initialize();
     bunsdown3->SetPosition({ 0.0f,2.0f,5.0f });
-    bunsdown3->SetScale({ 0.01f,0.001f,0.01f });
+    bunsdown3->SetScale({ 0.01f,0.01f,0.01f });
     bunsdown3->SetModel(bunsmodel3);
 
 
@@ -141,6 +141,10 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
 
     random_ = new RandomObj();
     random_->SetmeatModel(meatmodel);
+    random_->SettomatoModel(tomatomodel1);
+    random_->SetretasuModel(retasumodel1);
+    random_->SettirzuModel(cheasemodel);
+    random_->SetkutusitaModel(soxmodel);
 
     score_ = new ScoreManager();
 
@@ -244,6 +248,16 @@ void GameScene::Update()
 
         bunsup->SetEndSand(score_->GetSandWitch());
         bunsdown->SetEndSand(score_->GetSandWitch());
+
+        bunsup2->SetPosition(bunsup->GetPos());
+        bunsup3->SetPosition(bunsup->GetPos());
+        bunsup2->SetRotation(bunsup->GetRotation());
+        bunsup3->SetRotation(bunsup->GetRotation());
+
+        bunsdown2->SetPosition(bunsdown->GetPos());
+        bunsdown3->SetPosition(bunsdown->GetPos());
+        bunsdown2->SetRotation(bunsdown->GetRotation());
+        bunsdown3->SetRotation(bunsdown->GetRotation());
 
         //Rキーを押したらリトライ
         if (input->TriggerKey(DIK_R))

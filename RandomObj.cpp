@@ -23,7 +23,7 @@ void RandomObj::RandomInitialize()
 		//生成時間初期化
 		CreateObjTime = 0.0f;
 		//生成するOBJを決める
-		RandomNumber = 0;
+		RandomNumber = rand()%5;
 
 		//生成
 		std::unique_ptr<RandomObj>randomObj = std::make_unique<RandomObj>();
@@ -38,12 +38,59 @@ void RandomObj::RandomInitialize()
 			//コリジョンのサイズ登録
 			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,1.0f,2.5f,0 }, 1.0f));
 			//スケールのサイズ
-			randomObj->SetScale({ 0.005f,0.001f,0.005f });
+			randomObj->SetScale({ 0.01f,0.01f,0.01f });
 			//OBJの属性
 			randomObj->collider->SetColor(COLLISION_COLOR_MEAT);
 
 		}
+		else if (RandomNumber == 1)
+		{
+			//ここでモデルの形状をセット
+			randomObj->SetModel(tomatomodel);
+			//コリジョンのサイズ登録
+			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,1.0f,2.5f,0 }, 1.0f));
+			//スケールのサイズ
+			randomObj->SetScale({ 0.01f,0.01f,0.01f });
+			//OBJの属性
+			randomObj->collider->SetColor(COLLISION_COLOR_TOMATO);
 
+		}
+		else if (RandomNumber == 2)
+		{
+			//ここでモデルの形状をセット
+			randomObj->SetModel(retasumodel);
+			//コリジョンのサイズ登録
+			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,1.0f,2.5f,0 }, 1.0f));
+			//スケールのサイズ
+			randomObj->SetScale({ 0.01f,0.01f,0.01f });
+			//OBJの属性
+			randomObj->collider->SetColor(COLLISION_COLOR_RETASU);
+
+		}
+		else if (RandomNumber == 3)
+		{
+			//ここでモデルの形状をセット
+			randomObj->SetModel(tirzumodel);
+			//コリジョンのサイズ登録
+			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,1.0f,2.5f,0 }, 1.0f));
+			//スケールのサイズ
+			randomObj->SetScale({ 0.01f,0.01f,0.01f });
+			//OBJの属性
+			randomObj->collider->SetColor(COLLISION_COLOR_TIRZU);
+
+		}
+		else if (RandomNumber == 4)
+		{
+			//ここでモデルの形状をセット
+			randomObj->SetModel(kutusitamodel);
+			//コリジョンのサイズ登録
+			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,1.0f,2.5f,0 }, 1.0f));
+			//スケールのサイズ
+			randomObj->SetScale({ 0.01f,0.01f,0.01f });
+			//OBJの属性
+			randomObj->collider->SetColor(COLLISION_COLOR_KUTUSITA);
+
+		}
 	
 		//ポジションの初期位置設定
 		randomObj->SetPosition({ 0,0,100 });
