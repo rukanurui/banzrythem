@@ -20,7 +20,20 @@ void Buns::BunsInitialize(bool Frag)
 
 void Buns::BunsUpdate()
 {
-    Sandwich = 0;
+
+    SandTime++;
+
+    if (SandTime > 10)
+    {
+        Sandwich = false;
+        SandTime = 0;
+    }
+
+    if (EndSand == true)
+    {
+        Sandwich = false;
+        SandTime = 0;
+    }
 
     //パッドのポインタ
     pad* pad_ = nullptr;
@@ -153,7 +166,7 @@ void Buns::OnCollision(const CollisionInfo& info)
             if (rotation.z +error>= IngredientsRotation.z && rotation.z-error  <= IngredientsRotation.z)
             {
                 SandAttribute = 1;
-                Sandwich = 1;
+                Sandwich = true;
             }
         }
     }
@@ -167,7 +180,7 @@ void Buns::OnCollision(const CollisionInfo& info)
             if (rotation.z+error-180>= IngredientsRotation.z && rotation.z-error-180  <= IngredientsRotation.z)
             {
                 SandAttribute = 1;
-                Sandwich = 1;
+                Sandwich = true;
             }
         }
     }

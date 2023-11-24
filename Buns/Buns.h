@@ -28,6 +28,7 @@ public:
 
 	XMFLOAT3 GetIngredientsRotation() { return IngredientsRotation; }
 
+	void SetEndSand(bool flag) { EndSand = flag; }
 
 private:
 	//ƒ|ƒCƒ“ƒ^
@@ -40,9 +41,13 @@ private:
 
 	bool Push = false;
 
-	int Sandwich = 0;
+	bool Sandwich = 0;
+
+	bool EndSand = false;
 
 	int SandAttribute = 0;
+
+	int SandTime = 0;
 
 	XMFLOAT3 IngredientsRotation;
 

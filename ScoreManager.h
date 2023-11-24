@@ -17,7 +17,10 @@ public:
 
 	void Update();
 
-	void AddSandPoint(int point) { SandPoint += point; }
+	void SetUpSandPoint(bool point) { UpSandPoint = point; }
+
+	void SetUnderSandPoint(bool point) { UnderSandPoint = point; }
+
 
 	void SetSandType(int type) { SandType = type; }
 
@@ -28,13 +31,21 @@ public:
 
 	//getter
 	int GetScore() { return Score; }
+
+	bool GetSandWitch() { return SandWitch; }
 private:
 
 	int Score = 0;
 
-	int SandPoint = 0;
+	bool UpSandPoint = false;
+
+	bool UnderSandPoint = false;
+
+	bool SandWitch = false;
 
 	int SandType = 0;
+
+	int Time=0;
 
 	XMFLOAT3 IngredientsRotation = {0,0,0};
 

@@ -193,11 +193,14 @@ void GameScene::Update()
         collisionManager->CheckAllCollisions();
 
         //セット処理
-        score_->AddSandPoint(bunsup->GetSand());
-        score_->AddSandPoint(bunsdown->GetSand());
+        score_->SetUpSandPoint(bunsup->GetSand());
+        score_->SetUnderSandPoint(bunsdown->GetSand());
         score_->SetSandType(bunsup->GetSandAttribute());
 
         score_->Update();
+
+        bunsup->SetEndSand(score_->GetSandWitch());
+        bunsdown->SetEndSand(score_->GetSandWitch());
 
         //Rキーを押したらリトライ
         if (input->TriggerKey(DIK_R))
