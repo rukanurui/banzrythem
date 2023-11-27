@@ -54,6 +54,38 @@ void RandomObj::RandomInitialize()
 			//OBJÇÃëÆê´
 			randomObj->collider->SetColor(COLLISION_COLOR_TOMATO);
 
+			for (int i = 0; i < 3; i++)
+			{
+				//ê∂ê¨
+				std::unique_ptr<RandomObj>childObj = std::make_unique<RandomObj>();
+				//èâä˙âª
+				childObj->Initialize();
+
+				if (i == 0)
+				{
+					//éqê∂ê¨
+					childObj->SetModel(tomatomodel2);
+					childObj->SetPosition({ 0,0,100 });
+					childObj->SetScale({ 0.01f,0.01f,0.01f });
+					ChildObjs.push_back(std::move(childObj));
+				}
+				else if(i == 1)
+				{
+					childObj->SetModel(tomatomodel3);
+					childObj->SetPosition({ 0,0,100 });
+					childObj->SetScale({ 0.01f,0.01f,0.01f });
+					ChildObjs.push_back(std::move(childObj));
+				}
+				else if(i == 2)
+				{
+					childObj->SetModel(tomatomodel4);
+					childObj->SetPosition({ 0,0,100 });
+					childObj->SetScale({ 0.01f,0.01f,0.01f });
+					ChildObjs.push_back(std::move(childObj));
+				}
+			}
+			
+
 		}
 		else if (RandomNumber == 2)
 		{
@@ -65,6 +97,16 @@ void RandomObj::RandomInitialize()
 			randomObj->SetScale({ 0.01f,0.01f,0.01f });
 			//OBJÇÃëÆê´
 			randomObj->collider->SetColor(COLLISION_COLOR_RETASU);
+
+			//ê∂ê¨
+			std::unique_ptr<RandomObj>childObj = std::make_unique<RandomObj>();
+			//èâä˙âª
+			childObj->Initialize();
+
+			childObj->SetModel(retasumodel2);
+			childObj->SetPosition({ 0,0,100 });
+			childObj->SetScale({ 0.01f,0.01f,0.01f });
+			ChildObjs.push_back(std::move(childObj));
 
 		}
 		else if (RandomNumber == 3)
@@ -120,6 +162,11 @@ void RandomObj::RandomDraw(ID3D12GraphicsCommandList* cmdList)
 	for (std::unique_ptr<RandomObj>& Obj_ : Objs) {
 		if(Obj_->GetCanGetFlag()==true)Obj_->Draw(cmdList);
 	}
+
+	for (std::unique_ptr<RandomObj>& childObj_ : ChildObjs) {
+		childObj_->Draw(cmdList);
+	}
+
 }
 
 void RandomObj::RandomUpdate()
@@ -181,6 +228,12 @@ void RandomObj::RandomUpdate()
 		XMFLOAT3 Eye_ = Physics::splinePosition(points, Obj_->startIndex, Obj_->TimeRate);
 
 		Obj_->SetPosition(Eye_);
+
+		for (std::unique_ptr<RandomObj>& childObj_ : ChildObjs) {
+			childObj_->SetPosition(Eye_);
+			childObj_->SetRotation(Obj_->GetRotation());
+			childObj_->Update();
+		}
 
 		Obj_->Update();
 

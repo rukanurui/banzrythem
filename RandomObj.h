@@ -41,7 +41,11 @@ public:
 	//肉モデル
 	void SetmeatModel(FbxModel* model) { meatmodel = model; }
 	void SettomatoModel(FbxModel* model) { tomatomodel = model; }
+	void SettomatoModel2(FbxModel* model) { tomatomodel2 = model; }
+	void SettomatoModel3(FbxModel* model) { tomatomodel3 = model; }
+	void SettomatoModel4(FbxModel* model) { tomatomodel4 = model; }
 	void SetretasuModel(FbxModel* model) { retasumodel = model; }
+	void SetretasuModel2(FbxModel* model) { retasumodel2 = model; }
 	void SettirzuModel(FbxModel* model) { tirzumodel = model; }
 	void SetkutusitaModel(FbxModel* model) { kutusitamodel = model; }
 
@@ -69,15 +73,22 @@ private:
 
 	//出力時のオブジェクト配列
 	std::list<std::unique_ptr<RandomObj>> Objs;
+	//子のオブジェクト配列
+	std::list<std::unique_ptr<RandomObj>> ChildObjs;
 	//HWND
 	HWND hwnd = nullptr;
 
 	//オブジェクトのモデルポインタ
 	FbxModel* meatmodel = nullptr;//モデル
 	FbxModel* tomatomodel = nullptr;//モデル
+	FbxModel* tomatomodel2 = nullptr;//トマトモデル2
+	FbxModel* tomatomodel3 = nullptr;//トマトモデル3
+	FbxModel* tomatomodel4 = nullptr;//トマトモデル4
 	FbxModel* retasumodel = nullptr;//モデル
+	FbxModel* retasumodel2 = nullptr;//モデル
 	FbxModel* tirzumodel = nullptr;//モデル
 	FbxModel* kutusitamodel = nullptr;//モデル
+
 
 };
 
