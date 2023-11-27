@@ -115,6 +115,7 @@ private://メンバ変数
 	Buns* bunsdown = nullptr;//下のバンズ
 	FBXobj3d* bunsdown2 = nullptr;//下のバンズ2
 	FBXobj3d* bunsdown3 = nullptr;//下のバンズ3
+	//トマトとレタス
 	FBXobj3d* tomato2 = nullptr;//トマト2
 	FBXobj3d* tomato3 = nullptr;//トマト3
 	FBXobj3d* tomato4 = nullptr;//トマト4
@@ -126,8 +127,13 @@ private://メンバ変数
 	char moji[64];
 
 
+	//ゲームで使う変数
 	XMVECTOR upVel = { 0.0f,0.0f,0.0f };
 	XMVECTOR downVel = { 0.0f,0.0f,0.0f };
+	//ランダム受け取り用
+	int RandomNumber = 0;
+	//ランダムで指定されたものが生成されているか
+	bool RandomCreate = false;
 
 	FbxModel* modelfloor = nullptr;
 	FBXobj3d* floor = nullptr;
