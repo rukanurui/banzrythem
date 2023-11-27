@@ -211,7 +211,7 @@ void GameScene::Update()
         
         count++;
 
-        if (count < 540)
+        if (count < 3600)
         {
             // マウスの入力を取得
             Input::MouseMove mouseMove = input->GetMouseMove();
@@ -263,7 +263,7 @@ void GameScene::Update()
             bunsdown2->SetRotation(bunsdown->GetRotation());
             bunsdown3->SetRotation(bunsdown->GetRotation());
         }
-        else if(count >= 540)
+        else if(count >= 3600)
         {
             bunsup->Update();
             bunsup2->Update();
@@ -342,7 +342,7 @@ void GameScene::Draw()
 
          sousa->Draw();
 
-         if (count > 540)
+         if (count > 3600)
          {
              owari->Draw();
          }
@@ -350,7 +350,7 @@ void GameScene::Draw()
          // デバッグテキスト描画
          sprintf_s(moji, "%d", score_->GetScore());
          debugText->Print(moji, 100, 100);
-         debugText->DrawAll();
+        // debugText->DrawAll();
      }
 
    //  floor->Draw(cmdList);
