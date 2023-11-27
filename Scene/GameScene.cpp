@@ -142,7 +142,11 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     random_ = new RandomObj();
     random_->SetmeatModel(meatmodel);
     random_->SettomatoModel(tomatomodel1);
+    random_->SettomatoModel2(tomatomodel2);
+    random_->SettomatoModel3(tomatomodel3);
+    random_->SettomatoModel4(tomatomodel4);
     random_->SetretasuModel(retasumodel1);
+    random_->SetretasuModel2(retasumodel2);
     random_->SettirzuModel(cheasemodel);
     random_->SetkutusitaModel(soxmodel);
 
@@ -220,14 +224,6 @@ void GameScene::Update()
 
         camera->SetTarget({ 0.0f,3.8f,2.5f });
 
-        //RandomNumberを代入
-        RandomNumber = random_->GetRandomNumber();
-
-        if (RandomNumber !=1 && RandomNumber !=2)
-        {
-            RandomCreate = false;
-        }
-
         //更新処理
         random_->SetBunsPosition({0,0,0});
         random_->RandomInitialize();
@@ -265,54 +261,7 @@ void GameScene::Update()
         bunsdown2->SetRotation(bunsdown->GetRotation());
         bunsdown3->SetRotation(bunsdown->GetRotation());
         
-        //ランダムでトマトとレタスが指定されてたら生成する
-        if (RandomNumber == 2 && RandomCreate == false)
-        {
-            tomato2 = new FBXobj3d();
-            tomato2->Initialize();
-            tomato2->SetPosition({ random_->GetPos()});
-            tomato2->SetScale({ 0.01f,0.01f,0.01f });
-            tomato2->SetModel(tomatomodel2);
-
-            tomato3 = new FBXobj3d();
-            tomato3->Initialize();
-            tomato3->SetPosition({ random_->GetPos() });
-            tomato3->SetScale({ 0.01f,0.01f,0.01f });
-            tomato3->SetModel(tomatomodel3);
-
-            tomato4 = new FBXobj3d();
-            tomato4->Initialize();
-            tomato4->SetPosition({ random_->GetPos() });
-            tomato4->SetScale({ 0.01f,0.01f,0.01f });
-            tomato4->SetModel(tomatomodel4);
-
-            RandomCreate = true;
-        }
-        if (RandomNumber == 2 && RandomCreate == true)
-        {
-            tomato2->SetPosition({ random_->GetPos()});
-            tomato3->SetPosition({ random_->GetPos()});
-            tomato4->SetPosition({ random_->GetPos()});
-            tomato2->SetRotation(random_->GetRotation());
-            tomato3->SetRotation(random_->GetRotation());
-            tomato4->SetRotation(random_->GetRotation());
-        }
-
-        if (RandomNumber == 1 && RandomCreate == false)
-        {
-            retasu2 = new FBXobj3d();
-            retasu2->Initialize();
-            retasu2->SetPosition({ random_->GetPos() });
-            retasu2->SetScale({ 0.01f,0.01f,0.01f });
-            retasu2->SetModel(retasumodel2);
-            RandomCreate = true;
-        }
-
-       if (RandomNumber == 1 && RandomCreate == true)
-        {
-            retasu2->SetPosition(random_->GetPos());
-            retasu2->SetRotation(random_->GetRotation());
-        }
+        
 
         //Rキーを押したらリトライ
         if (input->TriggerKey(DIK_R))
@@ -367,16 +316,6 @@ void GameScene::Draw()
          bunsdown->Draw(cmdList);
          bunsdown2->Draw(cmdList);
          bunsdown3->Draw(cmdList);
-         if (RandomNumber == 2)
-         {
-             tomato2->Draw(cmdList);
-             tomato3->Draw(cmdList);
-             tomato4->Draw(cmdList);
-         }
-         if (RandomNumber == 1)
-         {
-             retasu2->Draw(cmdList);
-         }
          
          random_->RandomDraw(cmdList);
 
