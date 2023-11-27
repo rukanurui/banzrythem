@@ -25,6 +25,7 @@ void RandomObj::RandomInitialize()
 		//生成するOBJを決める
 		RandomNumber = rand()%5;
 
+		//RandomNumber = 1;
 		//生成
 		std::unique_ptr<RandomObj>randomObj = std::make_unique<RandomObj>();
 		//初期化
@@ -67,6 +68,7 @@ void RandomObj::RandomInitialize()
 					childObj->SetModel(tomatomodel2);
 					childObj->SetPosition({ 0,0,100 });
 					childObj->SetScale({ 0.01f,0.01f,0.01f });
+					childObj->SetCanGetFlag(true);
 					ChildObjs.push_back(std::move(childObj));
 				}
 				else if(i == 1)
@@ -74,6 +76,7 @@ void RandomObj::RandomInitialize()
 					childObj->SetModel(tomatomodel3);
 					childObj->SetPosition({ 0,0,100 });
 					childObj->SetScale({ 0.01f,0.01f,0.01f });
+					childObj->SetCanGetFlag(true);
 					ChildObjs.push_back(std::move(childObj));
 				}
 				else if(i == 2)
@@ -81,6 +84,7 @@ void RandomObj::RandomInitialize()
 					childObj->SetModel(tomatomodel4);
 					childObj->SetPosition({ 0,0,100 });
 					childObj->SetScale({ 0.01f,0.01f,0.01f });
+					childObj->SetCanGetFlag(true);
 					ChildObjs.push_back(std::move(childObj));
 				}
 			}
@@ -106,6 +110,7 @@ void RandomObj::RandomInitialize()
 			childObj->SetModel(retasumodel2);
 			childObj->SetPosition({ 0,0,100 });
 			childObj->SetScale({ 0.01f,0.01f,0.01f });
+			childObj->SetCanGetFlag(true);
 			ChildObjs.push_back(std::move(childObj));
 
 		}
@@ -164,13 +169,20 @@ void RandomObj::RandomDraw(ID3D12GraphicsCommandList* cmdList)
 	}
 
 	for (std::unique_ptr<RandomObj>& childObj_ : ChildObjs) {
-		childObj_->Draw(cmdList);
+		if (childObj_->GetCanGetFlag() == true)childObj_->Draw(cmdList);
 	}
 
 }
 
 void RandomObj::RandomUpdate()
 {
+
+	//当たり判定可視化用代入変数
+	int count = 0;
+	XMFLOAT3 pos[100] = {};
+	XMFLOAT3 rotate[100] = {};
+	XMFLOAT3 size[100] = {};
+
 	//更新
 	for (std::unique_ptr<RandomObj>& Obj_ : Objs) {
 
@@ -227,20 +239,41 @@ void RandomObj::RandomUpdate()
 		XMFLOAT3 Eye_ = Physics::splinePosition(points, Obj_->startIndex, Obj_->TimeRate);
 
 		Obj_->SetPosition(Eye_);
-
-		for (std::unique_ptr<RandomObj>& childObj_ : ChildObjs) {
-			childObj_->SetPosition(Eye_);
-			childObj_->SetRotation(Obj_->GetRotation());
-			childObj_->Update();
-		}
-
-		if (LostFlag == true)
-		{
-			ChildObjs.clear();
-		}
-
 		Obj_->Update();
 
+		if (Obj_->collider->color == 8)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				pos[count] = { Eye_ };
+				rotate[count] = { Obj_->GetRotation() };
+				count += 1;
+			}
+		}
+		else if(Obj_->collider->color == 16)
+		{
+			pos[count] = { Eye_ };
+			rotate[count] = { Obj_->GetRotation() };
+			count += 1;
+		}
+
+		
+
+	}
+
+     count = 0;//配列要素数カウントを0にする
+
+	for (std::unique_ptr<RandomObj>& childObj_ : ChildObjs) {
+		childObj_->SetPosition(pos[count]);
+		childObj_->SetRotation(rotate[count]);
+		childObj_->Update();
+
+		if (childObj_->GetPosZ() <= 4.0f)
+		{
+			childObj_->SetCanGetFlag(false);
+		}
+
+		count += 1;
 	}
 
 }

@@ -354,8 +354,6 @@ void GameScene::Draw()
      }
 
    //  floor->Draw(cmdList);
-
- 
 }
 
 
