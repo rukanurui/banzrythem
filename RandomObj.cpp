@@ -219,7 +219,6 @@ void RandomObj::RandomUpdate()
 				Obj_->SetCanGetFlag(false);
 
 				LostFlag = true;
-
 				
 			}
 		}
@@ -233,6 +232,11 @@ void RandomObj::RandomUpdate()
 			childObj_->SetPosition(Eye_);
 			childObj_->SetRotation(Obj_->GetRotation());
 			childObj_->Update();
+		}
+
+		if (LostFlag == true)
+		{
+			ChildObjs.clear();
 		}
 
 		Obj_->Update();
