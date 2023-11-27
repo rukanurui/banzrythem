@@ -48,7 +48,6 @@ private:
 	TitleScene* titleScene = nullptr;
 
 	//スプライト
-	Sprite* clear = nullptr;
 	XMFLOAT3 spritepos{ WindowsApp::window_width / 2 ,WindowsApp::window_height / 2,0 };
 	XMFLOAT2 spritesize{ WindowsApp::window_width,WindowsApp::window_height };
 	XMFLOAT2 movesize = { 800,300 };

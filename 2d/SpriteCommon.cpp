@@ -142,7 +142,7 @@ void SpriteCommon::CreateGraphicsPipeline()
     // ルートパラメータの設定
     CD3DX12_ROOT_PARAMETER rootparams[2];
     rootparams[0].InitAsConstantBufferView(0); // 定数バッファビューとして初期化(b0レジスタ)
-    rootparams[1].InitAsDescriptorTable(1, &descRangeSRV);
+    rootparams[1].InitAsDescriptorTable(1, &descRangeSRV,D3D12_SHADER_VISIBILITY_ALL);
 
     // スタティックサンプラー
     CD3DX12_STATIC_SAMPLER_DESC samplerDesc = CD3DX12_STATIC_SAMPLER_DESC(0);
@@ -176,6 +176,7 @@ void SpriteCommon::PreDraw()
     // テクスチャ用デスクリプタヒープの設定
     ID3D12DescriptorHeap* ppHeaps[] = {descHeapa.Get() };
     cmdLista->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
+
 }
 
 
@@ -240,6 +241,7 @@ void SpriteCommon::LoadTexture(UINT texnumber, const wchar_t* filename)
 
 void SpriteCommon::SetGraphicsRootDescriptorTabl(UINT rootParameterIndex,UINT texNumber)
 {
+
     cmdLista->SetGraphicsRootDescriptorTable(rootParameterIndex,
         CD3DX12_GPU_DESCRIPTOR_HANDLE(
             descHeapa->GetGPUDescriptorHandleForHeapStart(),

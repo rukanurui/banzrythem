@@ -271,20 +271,20 @@ void PostEffect::PreDrawScene(ID3D12GraphicsCommandList* cmdList)
     }
     
     //レンダ―ターゲットビュー用デスクリプタヒープのハンドルを取得
-    D3D12_CPU_DESCRIPTOR_HANDLE rtvH[2];
+    D3D12_CPU_DESCRIPTOR_HANDLE RtvH[2];
     for (int i = 0; i < 2; i++)
     {
-        rtvH[i] = CD3DX12_CPU_DESCRIPTOR_HANDLE(
+        RtvH[i] = CD3DX12_CPU_DESCRIPTOR_HANDLE(
             descHeapRTV->GetCPUDescriptorHandleForHeapStart(), i,
             spriteCommona->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV)
         );
     }
         
     //深度ステンシルビュー用デスクリプタヒープのハンドルを取得
-    D3D12_CPU_DESCRIPTOR_HANDLE dsvH =
+    D3D12_CPU_DESCRIPTOR_HANDLE DsvH =
         descHeapDSV->GetCPUDescriptorHandleForHeapStart();
     //レンダ―ターゲットをセット
-    cmdList->OMSetRenderTargets(2,rtvH, false, &dsvH);
+    cmdList->OMSetRenderTargets(2,RtvH, false, &DsvH);
     //ビューポートの設定
     CD3DX12_VIEWPORT Viewports[2];
     for (size_t i = 0; i < 2; i++)
@@ -305,11 +305,11 @@ void PostEffect::PreDrawScene(ID3D12GraphicsCommandList* cmdList)
     //全画面クリア
     for (int i = 0; i < 2; i++)
     {
-        cmdList->ClearRenderTargetView(rtvH[i], clearColor, 0, nullptr);
+        cmdList->ClearRenderTargetView(RtvH[i], clearColor, 0, nullptr);
     }
     
     //深度バッファ
-    cmdList->ClearDepthStencilView(dsvH, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+    cmdList->ClearDepthStencilView(DsvH, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 }
 
 void PostEffect::PostDrawScene(ID3D12GraphicsCommandList* cmdList)

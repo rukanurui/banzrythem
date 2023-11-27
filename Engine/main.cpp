@@ -15,7 +15,6 @@
 #include "../2d/Sprite.h"
 #include"../2d/PostEffect.h"
 #include"../scene/TransEffect.h"
-#include "../2d/DebugText.h"
 #include "Audio.h"
 
 #include "../3d/FbxLoader.h"
@@ -54,7 +53,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     Audio* audio = nullptr;
     Object3d* object3d = nullptr;
     SpriteCommon* spriteCommon = nullptr;
-    DebugText* debugText = nullptr;
     SceneManager* sceneManager = nullptr;
     TitleScene* titlescene = nullptr;
     BaseScene* nowScene = nullptr;
@@ -170,16 +168,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         
         
 
-        //obj、スプライトの描画
-        //tuto->Draw();
+        //obj、スプライトの描画x
         
-
        postEffect->PostDrawScene(dxCommon->GetCommandList());
 
         
         //描画前処理
         dxCommon->PreDraw();
 
+      
         
         //ポストエフェクトの描画
         postEffect->Draw(dxCommon->GetCommandList());

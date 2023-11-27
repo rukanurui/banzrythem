@@ -78,10 +78,12 @@ private://メンバ変数
 	//スプライト
 	SpriteCommon* spriteCommon = nullptr;
 	Sprite* trans = nullptr;
+	Sprite* sousa = nullptr;
+	Sprite* owari = nullptr;
 	TransEffect* transEffect = nullptr;
 
-	XMFLOAT3 spritepos{ WindowsApp::window_width / 2 ,WindowsApp::window_height / 2,0 };
-	XMFLOAT2 spritesize{ 1280,720 };
+	XMFLOAT3 spritepos{ WindowsApp::window_width / 2,WindowsApp::window_height / 2,0 };
+	XMFLOAT2 spritesize = { 1280,720 };
 
 	XMFLOAT2 Effectsize{ 0,0 };
 	float transcount = 0;
@@ -92,6 +94,7 @@ private://メンバ変数
 	float spriteangle = 0;
 	bool overfrag = true;
 	int wait = 0;
+	int count = 0;
 
 	//3d関連
 	//モデル
@@ -125,10 +128,6 @@ private://メンバ変数
 	//ゲームで使う変数
 	XMVECTOR upVel = { 0.0f,0.0f,0.0f };
 	XMVECTOR downVel = { 0.0f,0.0f,0.0f };
-	
-
-	FbxModel* modelfloor = nullptr;
-	FBXobj3d* floor = nullptr;
 
 	
 

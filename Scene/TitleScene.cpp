@@ -75,9 +75,9 @@ void TitleScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Spri
     spriteCommon = new SpriteCommon();
     spriteCommon->Initialize(dxCommon->GetDevice(), dxCommon->GetCommandList(), Windows->window_width, Windows->window_height);
 
-    spriteCommon->LoadTexture(2, L"Resources/start.png");
+    spriteCommon->LoadTexture(1, L"Resources/start.png");
 
-    title = Sprite::Create(spriteCommon, 2);
+    title = Sprite::Create(spriteCommon, 1);
     title->SetPosition({ WindowsApp::window_width / 2,WindowsApp::window_height / 2,0 });
     title->TransferVertexBuffer();
 
@@ -121,7 +121,15 @@ void TitleScene::Update()
         title->SetSize(spritesize);
         title->TransferVertexBuffer();
         title->Update();
-        if (input->TriggerKey(DIK_SPACE))
+
+        //パッドのポインタ
+        pad* pad_ = nullptr;
+        pad_ = new pad();
+
+        //パッドの更新
+        pad_->Update();
+
+        if (pad_->iPad_X==1)
         {
             playscene = 1;
             spritesize = { 1280,720 };

@@ -148,6 +148,7 @@ void Sprite::Draw()
     // ルートパラメータ0晩に定数バッファをセット
     cmdList->SetGraphicsRootConstantBufferView(0, constBuffa->GetGPUVirtualAddress());
 
+    ///////////////////////////////////////////////////////////////////////////////koko
     // ルートパラメータ1晩にシェーダリソースビューをセット
     spriteCommona->SetGraphicsRootDescriptorTabl(1, texNumbera);
 

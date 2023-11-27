@@ -44,17 +44,27 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     spriteCommon->Initialize(dxCommon->GetDevice(), dxCommon->GetCommandList(), Windows->window_width, Windows->window_height);
 
     // スプライト共通テクスチャ読み込み
+    spriteCommon->LoadTexture(0, L"Resources/sousa.png");
+    spriteCommon->LoadTexture(1, L"Resources/owari.png");
 
     //ポストエフェクト用テクスチャの読み込み
     spriteCommon->LoadTexture(101, L"Resources/White1x1.png");
 
     //スプライト生成
-
-   
     trans = Sprite::Create(spriteCommon, 101);
     trans->SetPosition({ WindowsApp::window_width / 2,WindowsApp::window_height / 2,0 });
     trans->SetSize({ Effectsize });
     trans->TransferVertexBuffer();
+
+    sousa = Sprite::Create(spriteCommon,0);
+    sousa->SetPosition({ spritepos });
+    sousa->SetSize({ spritesize });
+    sousa->TransferVertexBuffer();
+
+    owari = Sprite::Create(spriteCommon, 1);
+    owari->SetPosition({ spritepos });
+    owari->SetSize({ spritesize });
+    owari->TransferVertexBuffer();
 
     int PFnum = 101;
     //ポストエフェクトの初期化
@@ -84,9 +94,6 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     retasumodel1 = FbxLoader::GetInstance()->LoadModelFromFile("retasu1");
     retasumodel2 = FbxLoader::GetInstance()->LoadModelFromFile("retasu2");
     soxmodel = FbxLoader::GetInstance()->LoadModelFromFile("kutusita");
-    modelfloor = FbxLoader::GetInstance()->LoadModelFromFile("floor");
-
-
 
     bunsup = new Buns(input);
     bunsup->Initialize();
@@ -130,15 +137,6 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     bunsdown3->SetScale({ 0.01f,0.01f,0.01f });
     bunsdown3->SetModel(bunsmodel3);
 
-
-    //床
-    floor = new FBXobj3d();
-    floor->Initialize();
-    floor->SetPosition({ 0.0f,-1.0f,0.0f });
-    floor->SetScale({ 1.0f,0.1f,1.0f });
-    floor->SetModel(modelfloor);
-    floor->SetCollider(new BoxCollider(XMVECTOR{ 100.0f,0.7f,100.0f,0 }, 1.0f));
-
     random_ = new RandomObj();
     random_->SetmeatModel(meatmodel);
     random_->SettomatoModel(tomatomodel1);
@@ -174,11 +172,10 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
 
     //デバックテキスト
     debugText = new DebugText();
-
     const int debugTextTexNumber = 2;
-
     spriteCommon->LoadTexture(debugTextTexNumber, L"Resources/ASC_white1280.png");
     debugText->Initialize(spriteCommon, debugTextTexNumber);
+
 }
 
 
@@ -212,54 +209,91 @@ void GameScene::Update()
     if (transscene == true)
     {
         
+        count++;
 
-        // マウスの入力を取得
-        Input::MouseMove mouseMove = input->GetMouseMove();
+        if (count < 540)
+        {
+            // マウスの入力を取得
+            Input::MouseMove mouseMove = input->GetMouseMove();
 
-        CurretmouseX = mouseMove.lX;
-        CurretmouseY = mouseMove.lY;
+            CurretmouseX = mouseMove.lX;
+            CurretmouseY = mouseMove.lY;
 
-        camera->SetmouseX(CurretmouseX);
-        camera->SetmouseY(CurretmouseY);
+            camera->SetmouseX(CurretmouseX);
+            camera->SetmouseY(CurretmouseY);
 
-        camera->SetTarget({ 0.0f,3.8f,2.5f });
+            camera->SetTarget({ 0.0f,3.8f,2.5f });
 
-        //更新処理
-        random_->SetBunsPosition({0,0,0});
-        random_->RandomInitialize();
-        random_->RandomUpdate();
-        bunsup->Update();
-        bunsup2->Update();
-        bunsup3->Update();
-        bunsdown->Update();
-        bunsdown2->Update();
-        bunsdown3->Update();
-        bunsup->BunsUpdate();
-        bunsdown->BunsUpdate();
-        floor->Update();
-        camera->CurrentUpdate();
+            //更新処理
+            random_->SetBunsPosition({ 0,0,0 });
+            random_->RandomInitialize();
+            random_->RandomUpdate();
+            bunsup->Update();
+            bunsup2->Update();
+            bunsup3->Update();
+            bunsdown->Update();
+            bunsdown2->Update();
+            bunsdown3->Update();
+            bunsup->BunsUpdate();
+            bunsdown->BunsUpdate();
+            camera->CurrentUpdate();
+            sousa->Update();
 
-        collisionManager->CheckAllCollisions();
+            //debugText->Print("105", 100, 100, 50);
 
-        //セット処理
-        score_->SetUpSandPoint(bunsup->GetSand());
-        score_->SetUnderSandPoint(bunsdown->GetSand());
-        score_->SetSandType(bunsup->GetSandAttribute());
+            collisionManager->CheckAllCollisions();
 
-        score_->Update();
+            //セット処理
+            score_->SetUpSandPoint(bunsup->GetSand());
+            score_->SetUnderSandPoint(bunsdown->GetSand());
+            score_->SetSandType(bunsup->GetSandAttribute());
 
-        bunsup->SetEndSand(score_->GetSandWitch());
-        bunsdown->SetEndSand(score_->GetSandWitch());
+            score_->Update();
 
-        bunsup2->SetPosition(bunsup->GetPos());
-        bunsup3->SetPosition(bunsup->GetPos());
-        bunsup2->SetRotation(bunsup->GetRotation());
-        bunsup3->SetRotation(bunsup->GetRotation());
+            bunsup->SetEndSand(score_->GetSandWitch());
+            bunsdown->SetEndSand(score_->GetSandWitch());
 
-        bunsdown2->SetPosition(bunsdown->GetPos());
-        bunsdown3->SetPosition(bunsdown->GetPos());
-        bunsdown2->SetRotation(bunsdown->GetRotation());
-        bunsdown3->SetRotation(bunsdown->GetRotation());
+            bunsup2->SetPosition(bunsup->GetPos());
+            bunsup3->SetPosition(bunsup->GetPos());
+            bunsup2->SetRotation(bunsup->GetRotation());
+            bunsup3->SetRotation(bunsup->GetRotation());
+
+            bunsdown2->SetPosition(bunsdown->GetPos());
+            bunsdown3->SetPosition(bunsdown->GetPos());
+            bunsdown2->SetRotation(bunsdown->GetRotation());
+            bunsdown3->SetRotation(bunsdown->GetRotation());
+        }
+        else if(count >= 540)
+        {
+            bunsup->Update();
+            bunsup2->Update();
+            bunsup3->Update();
+            bunsdown->Update();
+            bunsdown2->Update();
+            bunsdown3->Update();
+            owari->Update();
+            camera->CurrentUpdate();
+
+            //パッドのポインタ
+            pad* pad_ = nullptr;
+            pad_ = new pad();
+
+            //パッドの更新
+            pad_->Update();
+
+            //SPACEキー押したらクリアシーンへ
+            if (pad_->iPad_X == 1)
+            {
+                //次のシーンを生成
+                BaseScene* scene = makeScene<ClearScene>();
+                //シーン切り替え
+                sceneManager->NextScene(scene);
+                //現在のプレイ中シーンをシーンマネージャーに渡す
+                sceneManager->SetplayScene(playscene);
+
+            }
+
+        }
         
         
 
@@ -273,18 +307,6 @@ void GameScene::Update()
             //現在のプレイ中シーンをシーンマネージャーに渡す
             sceneManager->SetplayScene(playscene);
         }
-
-        //SPACEキーをしたらクリアシーンへ
-        if (input->TriggerKey(DIK_P))
-        {
-            //次のシーンを生成
-            BaseScene* scene = makeScene<ClearScene>();
-            //シーン切り替え
-            sceneManager->NextScene(scene);
-            //現在のプレイ中シーンをシーンマネージャーに渡す
-            sceneManager->SetplayScene(playscene);
-
-        }
     }
 
 }
@@ -296,10 +318,6 @@ void GameScene::Draw()
 {
     // コマンドリストの取得
     ID3D12GraphicsCommandList* cmdList = dxCommon->GetCommandList();
-
-    
-     //スプライト描画前処理
-     spriteCommon->PreDraw();
 
      //シーン切り替え処理
      if (transscene == false)
@@ -319,6 +337,15 @@ void GameScene::Draw()
          
          random_->RandomDraw(cmdList);
 
+         //スプライト描画前処理
+         spriteCommon->PreDraw();
+
+         sousa->Draw();
+
+         if (count > 540)
+         {
+             owari->Draw();
+         }
 
          // デバッグテキスト描画
          sprintf_s(moji, "%d", score_->GetScore());
