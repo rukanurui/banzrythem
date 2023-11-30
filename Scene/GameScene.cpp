@@ -46,7 +46,7 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     // スプライト共通テクスチャ読み込み
     spriteCommon->LoadTexture(0, L"Resources/sousa.png");
     spriteCommon->LoadTexture(1, L"Resources/owari.png");
-    spriteCommon->LoadTexture(3, L"Resources/UI/PERFECT1.png");
+    spriteCommon->LoadTexture(3, L"Resources/UI/PERFETC3.png");
 
 
     //ポストエフェクト用テクスチャの読み込み
