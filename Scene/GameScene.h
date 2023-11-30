@@ -80,6 +80,8 @@ private://ƒƒ“ƒo•Ï”
 	Sprite* trans = nullptr;
 	Sprite* sousa = nullptr;
 	Sprite* owari = nullptr;
+
+	Sprite* perfect = nullptr;
 	TransEffect* transEffect = nullptr;
 
 	XMFLOAT3 spritepos{ WindowsApp::window_width / 2,WindowsApp::window_height / 2,0 };
@@ -151,6 +153,11 @@ private://ƒƒ“ƒo•Ï”
 	int tutoscene = 0;
 	int goflag = 0;
 	
+
+	XMFLOAT2 Scalecombo = {};
+	bool Scalecomboflag = true;
+	bool Scalecomboflag2 = false;
+	int ScalecomboTime = 0;
 
 };
 

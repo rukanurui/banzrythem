@@ -158,7 +158,7 @@ void Buns::BunsUpdate()
 void Buns::OnCollision(const CollisionInfo& info)
 {
     float Halfhalf = 90.0f;
-    float error = 10.0f;
+    float error = 30.0f;
 
     if (Upflag == true)
     {
@@ -238,7 +238,7 @@ void Buns::OnCollision(const CollisionInfo& info)
 
             IngredientsRotation = info.object->GetRotation();
 
-            if (rotation.z + error >= IngredientsRotation.z && rotation.z - error <= IngredientsRotation.z)
+            if (rotation.z + error - 180 >= IngredientsRotation.z && rotation.z - error - 180 <= IngredientsRotation.z)
             {
                 SandAttribute = 2;
                 Sandwich = true;
@@ -249,7 +249,7 @@ void Buns::OnCollision(const CollisionInfo& info)
 
             IngredientsRotation = info.object->GetRotation();
 
-            if (rotation.z + error >= IngredientsRotation.z && rotation.z - error <= IngredientsRotation.z)
+            if (rotation.z + error - 180 >= IngredientsRotation.z && rotation.z - error - 180 <= IngredientsRotation.z)
             {
                 SandAttribute = 3;
                 Sandwich = true;
@@ -260,7 +260,7 @@ void Buns::OnCollision(const CollisionInfo& info)
 
             IngredientsRotation = info.object->GetRotation();
 
-            if (rotation.z + error >= IngredientsRotation.z && rotation.z - error <= IngredientsRotation.z)
+            if (rotation.z + error - 180 >= IngredientsRotation.z && rotation.z - error - 180 <= IngredientsRotation.z)
             {
                 SandAttribute = 4;
                 Sandwich = true;
@@ -271,7 +271,7 @@ void Buns::OnCollision(const CollisionInfo& info)
 
             IngredientsRotation = info.object->GetRotation();
 
-            if (rotation.z + error >= IngredientsRotation.z && rotation.z - error <= IngredientsRotation.z)
+            if (rotation.z + error - 180 >= IngredientsRotation.z && rotation.z - error - 180 <= IngredientsRotation.z)
             {
                 SandAttribute = 5;
                 Sandwich = true;

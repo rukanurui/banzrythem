@@ -46,6 +46,8 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     // スプライト共通テクスチャ読み込み
     spriteCommon->LoadTexture(0, L"Resources/sousa.png");
     spriteCommon->LoadTexture(1, L"Resources/owari.png");
+    spriteCommon->LoadTexture(3, L"Resources/UI/PERFECT1.png");
+
 
     //ポストエフェクト用テクスチャの読み込み
     spriteCommon->LoadTexture(101, L"Resources/White1x1.png");
@@ -65,6 +67,12 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     owari->SetPosition({ spritepos });
     owari->SetSize({ spritesize });
     owari->TransferVertexBuffer();
+
+    perfect = Sprite::Create(spriteCommon, 3);
+    perfect->SetPosition({ 400,480,0});
+    perfect->SetRotation(-10);
+    perfect->SetSize({ 200,50 });
+    perfect->TransferVertexBuffer();
 
     int PFnum = 101;
     //ポストエフェクトの初期化
@@ -208,7 +216,8 @@ void GameScene::Update()
     //ゲーム本編
     if (transscene == true)
     {
-        
+
+      
         count++;
 
         if (count < 3600)
@@ -239,9 +248,64 @@ void GameScene::Update()
             camera->CurrentUpdate();
             sousa->Update();
 
+
+
+
+
+
+
+
+          
+
             //debugText->Print("105", 100, 100, 50);
 
             collisionManager->CheckAllCollisions();
+
+            if (bunsup->GetSand() == 1 && bunsdown->GetSand() == 1)
+            {
+                Scalecomboflag = false;
+            }
+
+
+            if (Scalecomboflag == false)
+            {
+                if (Scalecomboflag2 == true)
+                {
+                    if (Scalecombo.y > 70.0f)Scalecombo.y -= 15.0f;
+                    if (Scalecombo.x > 280.0f)Scalecombo.x -= 60.0f;
+
+                    if (Scalecombo.y <= 70.0f && Scalecombo.y <= 280.0f)
+                    {
+                        Scalecomboflag2 = false;
+                        Scalecomboflag = true;
+                    }
+                }
+                else
+                {
+                    if (Scalecombo.y < 80.0f)Scalecombo.y += 15.0f;
+                    if (Scalecombo.x < 320.0f)Scalecombo.x += 60.0f;
+
+                    if (Scalecombo.y >= 80.0f && Scalecombo.x >= 320.0f)Scalecomboflag2 = true;
+
+                }
+            }
+            else
+            {
+                ScalecomboTime++;
+
+                if (ScalecomboTime >= 180)
+                {
+                    Scalecombo.x = 0;
+                    Scalecombo.y = 0;
+                    ScalecomboTime = 0;
+                }
+            }
+
+            perfect->SetSize({ Scalecombo });
+
+            perfect->Update();
+
+            perfect->TransferVertexBuffer();
 
             //セット処理
             score_->SetUpSandPoint(bunsup->GetSand());
@@ -341,6 +405,7 @@ void GameScene::Draw()
          spriteCommon->PreDraw();
 
          sousa->Draw();
+         perfect->Draw();
 
          if (count > 3600)
          {

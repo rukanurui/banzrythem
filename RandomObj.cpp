@@ -37,7 +37,7 @@ void RandomObj::RandomInitialize()
 			//ここでモデルの形状をセット
 			randomObj->SetModel(meatmodel);
 			//コリジョンのサイズ登録
-			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,1.0f,2.5f,0 }, 1.0f));
+			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 3.0f,1.0f,4.5f,0 }, 1.0f));
 			//スケールのサイズ
 			randomObj->SetScale({ 0.01f,0.01f,0.01f });
 			//OBJの属性
@@ -49,7 +49,7 @@ void RandomObj::RandomInitialize()
 			//ここでモデルの形状をセット
 			randomObj->SetModel(tomatomodel);
 			//コリジョンのサイズ登録
-			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,1.0f,2.5f,0 }, 1.0f));
+			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 3.0f,1.0f,4.5f,0 }, 1.0f));
 			//スケールのサイズ
 			randomObj->SetScale({ 0.01f,0.01f,0.01f });
 			//OBJの属性
@@ -96,7 +96,7 @@ void RandomObj::RandomInitialize()
 			//ここでモデルの形状をセット
 			randomObj->SetModel(retasumodel);
 			//コリジョンのサイズ登録
-			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,1.0f,2.5f,0 }, 1.0f));
+			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 3.0f,1.0f,4.5f,0 }, 1.0f));
 			//スケールのサイズ
 			randomObj->SetScale({ 0.01f,0.01f,0.01f });
 			//OBJの属性
@@ -119,7 +119,7 @@ void RandomObj::RandomInitialize()
 			//ここでモデルの形状をセット
 			randomObj->SetModel(tirzumodel);
 			//コリジョンのサイズ登録
-			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,1.0f,2.5f,0 }, 1.0f));
+			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 3.0f,1.0f,4.5f,0 }, 1.0f));
 			//スケールのサイズ
 			randomObj->SetScale({ 0.01f,0.01f,0.01f });
 			//OBJの属性
@@ -131,7 +131,7 @@ void RandomObj::RandomInitialize()
 			//ここでモデルの形状をセット
 			randomObj->SetModel(kutusitamodel);
 			//コリジョンのサイズ登録
-			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 1.0f,1.0f,2.5f,0 }, 1.0f));
+			randomObj->SetCollider(new BoxCollider(XMVECTOR{ 3.0f,1.0f,4.5f,0 }, 1.0f));
 			//スケールのサイズ
 			randomObj->SetScale({ 0.01f,0.01f,0.01f });
 			//OBJの属性
