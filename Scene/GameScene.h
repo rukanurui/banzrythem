@@ -14,7 +14,7 @@
 #include "../2d/SpriteCommon.h"
 #include "../2d/Sprite.h"
 #include"../2d/PostEffect.h"
-#include "../2d/DebugText.h"
+//#include "../2d/DebugText.h"
 #include "../Engine/Audio.h"
 
 #include "fbxsdk.h"
@@ -68,7 +68,8 @@ private://ÉÅÉìÉoïœêî
 	//pad* Pad = nullptr;
 	Input* input = nullptr;
 	DXCommon* dxCommon = nullptr;
-	DebugText* debugText;
+	//DebugText* debugText;
+	Sprite* debugText = nullptr;
 	Audio* audio = nullptr;
 	Camera* camera = nullptr;
 	Buns* buns = nullptr;

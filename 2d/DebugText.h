@@ -1,7 +1,5 @@
 #pragma once
-#include "DebugText.h"
 #include "Sprite.h"
-#include <string>
 #include <Windows.h>
 
 class DebugText

@@ -1,6 +1,6 @@
 #pragma once
 #include "SpriteCommon.h"
-
+#include <string>
 #include <wrl.h>
 #include <d3d12.h>
 #include <DirectXMath.h>
@@ -38,11 +38,6 @@ public:
 
     static Sprite* Create(SpriteCommon* spriteCommon, UINT texNumber, XMFLOAT2 anchorpoint = { 0.5f,0.5f }, bool isFlipX = false, bool isFlipY = false);
 
-
-public:
-
-    
-
     void Initialize(SpriteCommon* spriteCommon, UINT texNumber,XMFLOAT2 anchorpoint, bool isFlipX, bool isFlipY);
 
     //頂点バッファの転送
@@ -60,6 +55,12 @@ public:
     void SetSize(const DirectX::XMFLOAT2& size) { sizea = size; }
     void SetTexLeftTop(const XMFLOAT2& texLeftTop) { texLeftTopa = texLeftTop ;}
     void SetTexSize(const XMFLOAT2& texSize) { texSizea = texSize; }
+
+    //DebugText
+    void DebugInitialize(SpriteCommon* spriteCommon, UINT texnumber);
+    void DebugPrint(const std::string& text, float x, float y, float scale = 1.0f);
+    void DebugDrawAll();
+    void DebugFinalize();
 
 protected:
     SpriteCommon* spriteCommona = nullptr;
@@ -95,5 +96,16 @@ protected:
     XMFLOAT2 texSizea = { 100, 100 };
     // 非表示
     bool isInvisiblea = false;
+
+    //DebugText用
+    static const int maxCharCount = 256;    // 最大文字数
+    static const int fontWidth = 80;         // フォント画像内1文字分の横幅
+    static const int fontHeight = 80;       // フォント画像内1文字分の縦幅
+    static const int fontLineCount = 16;    // フォント画像内1行分の文字数
+    // スプライトデータの配列
+    Sprite* spritesa[maxCharCount];
+    // スプライトデータ配列の添え字番号
+    int spriteIndexa = 0;
+
 };
 

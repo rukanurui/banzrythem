@@ -179,10 +179,11 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
 
 
     //デバックテキスト
-    debugText = new DebugText();
+    //debugText = new DebugText();
+    debugText = new Sprite();
     const int debugTextTexNumber = 2;
     spriteCommon->LoadTexture(debugTextTexNumber, L"Resources/ASC_white1280.png");
-    debugText->Initialize(spriteCommon, debugTextTexNumber);
+    debugText->DebugInitialize(spriteCommon, debugTextTexNumber);
 
 }
 
@@ -247,16 +248,7 @@ void GameScene::Update()
             bunsdown->BunsUpdate();
             camera->CurrentUpdate();
             sousa->Update();
-
-
-
-
-
-
-
-
           
-
             //debugText->Print("105", 100, 100, 50);
 
             collisionManager->CheckAllCollisions();
@@ -414,8 +406,10 @@ void GameScene::Draw()
 
          // デバッグテキスト描画
          sprintf_s(moji, "%d", score_->GetScore());
-         debugText->Print(moji, 100, 100);
-        // debugText->DrawAll();
+         debugText->DebugPrint(moji, 100, 100);
+         debugText->DebugDrawAll();
+         
+
      }
 
    //  floor->Draw(cmdList);

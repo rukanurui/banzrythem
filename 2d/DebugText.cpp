@@ -37,7 +37,6 @@ void DebugText::Print(const std::string& text, float x, float y, float scale)
         int fontIndexX = fontIndex % fontLineCount;
 
         // À•WŒvŽZ
-
         spritesa[spriteIndexa]->SetPosition({ x + fontWidth * scale * i, y, 0 });
         spritesa[spriteIndexa]->SetTexLeftTop({ (float)fontIndexX * fontWidth, (float)fontIndexY * fontHeight });
         spritesa[spriteIndexa]->SetTexSize({ fontWidth, fontHeight });
