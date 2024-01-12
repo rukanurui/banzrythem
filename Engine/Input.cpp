@@ -51,9 +51,9 @@ void Input::Update()
     oldmouse = mouse;
 
     //カーソルの位置固定
-    SetCursorPos(990, 540);
+    //SetCursorPos(990, 540);
     //マウスカーソルの表示選択
-    ShowCursor(FALSE);
+    ShowCursor(TRUE);
 
     result = devmouse->GetDeviceState(sizeof(mouse), &mouse);
 }

@@ -129,7 +129,7 @@ void TitleScene::Update()
         //パッドの更新
         pad_->Update();
 
-        if (pad_->iPad_X==1)
+        if (pad_->iPad_X==1 || input->TriggerKey(DIK_SPACE))
         {
             playscene = 1;
             spritesize = { 1280,720 };

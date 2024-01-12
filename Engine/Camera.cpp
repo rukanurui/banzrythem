@@ -196,7 +196,7 @@ void Camera::CurrentUpdate()
 	// マウスの入力を取得
 	Input::MouseMove mouseMove = input->GetMouseMove();
 
-	if (mouseMove.lX == CurretmouseX || mouseMove.lY == CurretmouseY)
+	/*if (mouseMove.lX == CurretmouseX || mouseMove.lY == CurretmouseY)
 	{
 		
 		float dy = (mouseMove.lX * scaleX) * 0.25;
@@ -210,7 +210,7 @@ void Camera::CurrentUpdate()
 
 	
 	anglelimitX += angleX;
-	anglelimitY += angleY;
+	anglelimitY += angleY;*/
 	/*
 	if (anglelimitX <= 1.4f && anglelimitX >= -1.4f)
 	{
@@ -221,8 +221,10 @@ void Camera::CurrentUpdate()
 		anglelimitX = angleculentX;
 	}*/
 
+	viewDirtyFlag = true;
+
 	//座標操作
-	if (!input->PushKey(DIK_A) && !input->PushKey(DIK_D)) Velocity.x = 0;
+	/*if (!input->PushKey(DIK_A) && !input->PushKey(DIK_D)) Velocity.x = 0;
 	if ((input->PushKey(DIK_A) || input->PushKey(DIK_D)))
 	{
 
@@ -254,7 +256,7 @@ void Camera::CurrentUpdate()
 		move = XMVector3Transform(move, matRot);
 		MoveTarget(move);
 
-	}
+	}*/
 
 	
 	if (viewDirtyFlag == true)
