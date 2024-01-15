@@ -69,7 +69,10 @@ private://メンバ変数
 	Input* input = nullptr;
 	DXCommon* dxCommon = nullptr;
 	//DebugText* debugText;
-	Sprite* debugText = nullptr;
+	Sprite* debugText  = nullptr;
+	Sprite* debugText2 = nullptr;
+	Sprite* debugText3 = nullptr;
+
 	Audio* audio = nullptr;
 	Camera* camera = nullptr;
 	Buns* buns = nullptr;
@@ -83,6 +86,13 @@ private://メンバ変数
 	Sprite* owari = nullptr;
 
 	Sprite* perfect = nullptr;
+	Sprite* good = nullptr;
+	Sprite* bad = nullptr;
+
+	Sprite* back = nullptr;
+
+
+
 	TransEffect* transEffect = nullptr;
 
 	XMFLOAT3 spritepos{ WindowsApp::window_width / 2,WindowsApp::window_height / 2,0 };
@@ -126,6 +136,8 @@ private://メンバ変数
 	ScoreManager* score_ = nullptr;
 
 	char moji[64];
+	char moji2[64];
+	char moji3[64];
 
 
 	//ゲームで使う変数
@@ -146,7 +158,8 @@ private://メンバ変数
 	int firstfrag = 0;
 
 	//シーン関連
-	float timecount = 0;//時間管理酔う変数
+	int timecount = 0;//時間管理酔う変数
+	int time2count = 0;
 	//死んだときのシーン
 	int diescene = 0;
 	//クリアしたシーン

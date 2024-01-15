@@ -54,13 +54,16 @@ public:
 	//ナンバーのGetter
 	const int& GetRandomNumber() { return RandomNumber; }
 
+	bool GetGetFlag() { return GetFlag; }
 
 private:
 	//ランダム変数
 	float RandomHalfway_X = 0;
 	float RandomHalfway_Y = 0;
 
-	int RandomNumber = 0;
+	int RandomNumber = 0;	
+
+	bool GetFlag = true;
 
 	float TimeRate = 0.0f;
 

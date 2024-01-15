@@ -26,12 +26,14 @@ void Buns::BunsUpdate()
     if (SandTime > 10)
     {
         Sandwich = false;
+        perfect = false;
         SandTime = 0;
     }
 
     if (EndSand == true)
     {
         Sandwich = false;
+        perfect = false;
         SandTime = 0;
     }
 
@@ -158,7 +160,8 @@ void Buns::BunsUpdate()
 void Buns::OnCollision(const CollisionInfo& info)
 {
     float Halfhalf = 90.0f;
-    float error = 30.0f;
+    float error = 50.0f;
+    float perfect_e = 20.0f;
 
     if (Upflag == true)
     {
@@ -173,6 +176,11 @@ void Buns::OnCollision(const CollisionInfo& info)
             {
                 SandAttribute = 1;
                 Sandwich = true;
+
+                if (rotation.z + 180.0f + perfect_e >= IngredientsRotation.z && rotation.z + 180.0f - perfect_e <= IngredientsRotation.z)
+                {
+                    perfect = true;
+                }
             }
         }
         else  if (info.collider->color == 4 && info.object->GetCanGetFlag() == true)
@@ -184,6 +192,11 @@ void Buns::OnCollision(const CollisionInfo& info)
             {
                 SandAttribute = 2;
                 Sandwich = true;
+
+                if (rotation.z + 180.0f + perfect_e >= IngredientsRotation.z && rotation.z + 180.0f - perfect_e <= IngredientsRotation.z)
+                {
+                    perfect = true;
+                }
             }
         }
         else if (info.collider->color == 8 && info.object->GetCanGetFlag() == true)
@@ -195,6 +208,11 @@ void Buns::OnCollision(const CollisionInfo& info)
             {
                 SandAttribute = 3;
                 Sandwich = true;
+
+                if (rotation.z + 180.0f + perfect_e >= IngredientsRotation.z && rotation.z + 180.0f - perfect_e <= IngredientsRotation.z)
+                {
+                    perfect = true;
+                }
             }
         }
         else if (info.collider->color == 16 && info.object->GetCanGetFlag() == true)
@@ -206,6 +224,10 @@ void Buns::OnCollision(const CollisionInfo& info)
             {
                 SandAttribute = 4;
                 Sandwich = true;
+                if (rotation.z + 180.0f + perfect_e >= IngredientsRotation.z && rotation.z + 180.0f - perfect_e <= IngredientsRotation.z)
+                {
+                    perfect = true;
+                }
             }
         }
         else  if (info.collider->color == 32 && info.object->GetCanGetFlag() == true)
@@ -217,6 +239,25 @@ void Buns::OnCollision(const CollisionInfo& info)
             {
                 SandAttribute = 5;
                 Sandwich = true;
+                if (rotation.z + 180.0f + perfect_e >= IngredientsRotation.z && rotation.z + 180.0f - perfect_e <= IngredientsRotation.z)
+                {
+                    perfect = true;
+                }
+            }
+        }
+        else  if (info.collider->color == 64 && info.object->GetCanGetFlag() == true)
+        {
+
+            IngredientsRotation = info.object->GetRotation();
+
+            if (rotation.z + 180.0f + error >= IngredientsRotation.z && rotation.z + 180.0f - error <= IngredientsRotation.z)
+            {
+                SandAttribute = 6;
+                Sandwich = true;
+                if (rotation.z + 180.0f + perfect_e >= IngredientsRotation.z && rotation.z + 180.0f - perfect_e <= IngredientsRotation.z)
+                {
+                    perfect = true;
+                }
             }
         }
     }
@@ -231,6 +272,10 @@ void Buns::OnCollision(const CollisionInfo& info)
             {
                 SandAttribute = 1;
                 Sandwich = true;
+                if (rotation.z + perfect_e - 180 >= IngredientsRotation.z && rotation.z - perfect_e - 180 <= IngredientsRotation.z)
+                {
+                    perfect = true;
+                }
             }
         }
         else  if (info.collider->color == 4 && info.object->GetCanGetFlag() == true)
@@ -242,6 +287,10 @@ void Buns::OnCollision(const CollisionInfo& info)
             {
                 SandAttribute = 2;
                 Sandwich = true;
+                if (rotation.z + perfect_e - 180 >= IngredientsRotation.z && rotation.z - perfect_e - 180 <= IngredientsRotation.z)
+                {
+                    perfect = true;
+                }
             }
         }
         else if (info.collider->color == 8 && info.object->GetCanGetFlag() == true)
@@ -253,6 +302,10 @@ void Buns::OnCollision(const CollisionInfo& info)
             {
                 SandAttribute = 3;
                 Sandwich = true;
+                if (rotation.z + perfect_e - 180 >= IngredientsRotation.z && rotation.z - perfect_e - 180 <= IngredientsRotation.z)
+                {
+                    perfect = true;
+                }
             }
         }
         else if (info.collider->color == 16 && info.object->GetCanGetFlag() == true)
@@ -264,6 +317,10 @@ void Buns::OnCollision(const CollisionInfo& info)
             {
                 SandAttribute = 4;
                 Sandwich = true;
+                if (rotation.z + perfect_e - 180 >= IngredientsRotation.z && rotation.z - perfect_e - 180 <= IngredientsRotation.z)
+                {
+                    perfect = true;
+                }
             }
         }
         else  if (info.collider->color == 32 && info.object->GetCanGetFlag() == true)
@@ -275,6 +332,25 @@ void Buns::OnCollision(const CollisionInfo& info)
             {
                 SandAttribute = 5;
                 Sandwich = true;
+                if (rotation.z + perfect_e - 180 >= IngredientsRotation.z && rotation.z - perfect_e - 180 <= IngredientsRotation.z)
+                {
+                    perfect = true;
+                }
+            }
+        }
+        else  if (info.collider->color == 64 && info.object->GetCanGetFlag() == true)
+        {
+
+            IngredientsRotation = info.object->GetRotation();
+
+            if (rotation.z + error - 180 >= IngredientsRotation.z && rotation.z - error - 180 <= IngredientsRotation.z)
+            {
+                SandAttribute = 6;
+                Sandwich = true;
+                if (rotation.z + perfect_e - 180 >= IngredientsRotation.z && rotation.z - perfect_e - 180 <= IngredientsRotation.z)
+                {
+                    perfect = true;
+                }
             }
         }
     }

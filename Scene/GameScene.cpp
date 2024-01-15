@@ -47,6 +47,11 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     spriteCommon->LoadTexture(0, L"Resources/sousa.png");
     spriteCommon->LoadTexture(1, L"Resources/owari.png");
     spriteCommon->LoadTexture(3, L"Resources/UI/PERFETC3.png");
+    spriteCommon->LoadTexture(4, L"Resources/UI/GOOD1.png");
+    spriteCommon->LoadTexture(5, L"Resources/UI/BAD1.png");
+    spriteCommon->LoadTexture(6, L"Resources/back.png");
+
+
 
 
     //ポストエフェクト用テクスチャの読み込み
@@ -73,6 +78,24 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     perfect->SetRotation(-10);
     perfect->SetSize({ 200,50 });
     perfect->TransferVertexBuffer();
+
+    good = Sprite::Create(spriteCommon, 4);
+    good->SetPosition({ 400,480,0 });
+    good->SetRotation(-10);
+    good->SetSize({ 1024,389 });
+    good->TransferVertexBuffer();
+
+    bad = Sprite::Create(spriteCommon, 5);
+    bad->SetPosition({ 400,480,0 });
+    bad->SetRotation(-10);
+    bad->SetSize({ 1024,469 });
+    bad->TransferVertexBuffer();
+
+    back = Sprite::Create(spriteCommon, 6);
+    back->SetPosition({ 640,360,0 });
+    //back->SetRotation(0);
+    back->SetSize({ 1280,720 });
+    back->TransferVertexBuffer();
 
     int PFnum = 101;
     //ポストエフェクトの初期化
@@ -181,9 +204,16 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     //デバックテキスト
     //debugText = new DebugText();
     debugText = new Sprite();
+    debugText2 = new Sprite();
+    debugText3 = new Sprite();
+
+
+
     const int debugTextTexNumber = 2;
     spriteCommon->LoadTexture(debugTextTexNumber, L"Resources/ASC_white1280.png");
     debugText->DebugInitialize(spriteCommon, debugTextTexNumber);
+    debugText2->DebugInitialize(spriteCommon, debugTextTexNumber);
+    debugText3->DebugInitialize(spriteCommon, debugTextTexNumber);
 
 }
 
@@ -221,6 +251,14 @@ void GameScene::Update()
       
         count++;
 
+        time2count++;
+
+        if (time2count >= 60)
+        {
+            time2count = 0;
+            timecount += 1;
+        }
+
         if (count < 3600)
         {
             // マウスの入力を取得
@@ -248,6 +286,7 @@ void GameScene::Update()
             bunsdown->BunsUpdate();
             camera->CurrentUpdate();
             sousa->Update();
+            back->Update();
           
             //debugText->Print("105", 100, 100, 50);
 
@@ -294,15 +333,23 @@ void GameScene::Update()
             }
 
             perfect->SetSize({ Scalecombo });
-
             perfect->Update();
-
             perfect->TransferVertexBuffer();
+
+            good->SetSize({ Scalecombo });
+            good->Update();
+            good->TransferVertexBuffer();
+
+            bad->SetSize({ Scalecombo });
+            bad->Update();
+            bad->TransferVertexBuffer();
 
             //セット処理
             score_->SetUpSandPoint(bunsup->GetSand());
             score_->SetUnderSandPoint(bunsdown->GetSand());
             score_->SetSandType(bunsup->GetSandAttribute());
+
+            score_->SetPerfect(bunsup->GetPerfect());
 
             score_->Update();
 
@@ -383,7 +430,11 @@ void GameScene::Draw()
 
      if (playscene == 1)
      {
+         spriteCommon->PreDraw();
+         if (transscene != false)back->Draw();
 
+
+         
          bunsup->Draw(cmdList);
          bunsup2->Draw(cmdList);
          bunsup3->Draw(cmdList);
@@ -393,11 +444,24 @@ void GameScene::Draw()
          
          random_->RandomDraw(cmdList);
 
-         //スプライト描画前処理
+         //  スプライト描画前処理
          spriteCommon->PreDraw();
+         //back->Draw();
+
 
          sousa->Draw();
-         perfect->Draw();
+         if (score_->GetType() == 1)
+         {
+             perfect->Draw();
+         }
+         else  if (score_->GetType() == 2)
+         {
+             good->Draw();
+         }
+         else if (score_->GetType() == 3)
+         {
+             bad->Draw();
+         }
 
          if (count > 3600)
          {
@@ -405,10 +469,21 @@ void GameScene::Draw()
          }
 
          // デバッグテキスト描画
-         sprintf_s(moji, "%d", score_->GetScore());
-         debugText->DebugPrint(moji, 100, 100);
+         sprintf_s(moji, "%d", score_->GetCombo());
+         sprintf_s(moji2, "%d", score_->GetScore());
+         sprintf_s(moji3, "%d", timecount);
+
+   
+         debugText->SetColor({ 1,1,1,0 });
+         debugText->DebugPrint(moji, 100, 100,3.0f);
          debugText->DebugDrawAll();
          
+         debugText2->DebugPrint(moji2, 640, 360);
+         debugText2->DebugDrawAll();
+
+         debugText3->DebugPrint(moji3, 640, 100);
+         debugText3->DebugDrawAll();
+
 
      }
 

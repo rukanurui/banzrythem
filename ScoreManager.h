@@ -24,6 +24,8 @@ public:
 
 	void SetSandType(int type) { SandType = type; }
 
+	void SetPerfect(bool i) { perfect = i; }
+
 	void SetIngredientsRotation(XMFLOAT3 rotation) { IngredientsRotation = rotation; }
 	void SetBunsUpRotation(XMFLOAT3 rotation) { BunsUpRotation = rotation; }
 	void SetBunsDownRotation(XMFLOAT3 rotation) { BunsDownRotation = rotation; }
@@ -33,6 +35,14 @@ public:
 	int GetScore() { return Score; }
 
 	bool GetSandWitch() { return SandWitch; }
+
+	int GetCombo() { return combo; }
+
+	int GetComboTime() { return combotime; }
+
+	int GetComboFlag() { return comoboflag; }
+
+	int GetType() { return type; }
 private:
 
 	int Score = 0;
@@ -46,6 +56,16 @@ private:
 	int SandType = 0;
 
 	int Time=0;
+
+	int combo = 0;
+
+	int combotime = 0;
+
+	int comoboflag = 0;
+
+	int type = 0;
+
+	bool perfect = false;
 
 	XMFLOAT3 IngredientsRotation = {0,0,0};
 

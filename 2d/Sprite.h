@@ -55,6 +55,7 @@ public:
     void SetSize(const DirectX::XMFLOAT2& size) { sizea = size; }
     void SetTexLeftTop(const XMFLOAT2& texLeftTop) { texLeftTopa = texLeftTop ;}
     void SetTexSize(const XMFLOAT2& texSize) { texSizea = texSize; }
+    void SetColor(const XMFLOAT4& color) { colora = color; }
 
     //DebugText
     void DebugInitialize(SpriteCommon* spriteCommon, UINT texnumber);

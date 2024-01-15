@@ -26,6 +26,8 @@ public:
 
 	int GetSandAttribute() { return SandAttribute; }
 
+	bool GetPerfect() { return perfect; }
+
 	XMFLOAT3 GetIngredientsRotation() { return IngredientsRotation; }
 
 	void SetEndSand(bool flag) { EndSand = flag; }
@@ -44,6 +46,8 @@ private:
 	bool Sandwich = 0;
 
 	bool EndSand = false;
+
+	bool perfect = false;
 
 	int SandAttribute = 0;
 
