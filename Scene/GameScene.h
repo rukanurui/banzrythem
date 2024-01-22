@@ -184,6 +184,7 @@ private://メンバ変数
 		sox//靴下
 	};
 
+	int cooltime = 60;
 	
 
 	///カメラ関連
@@ -212,6 +213,7 @@ private://メンバ変数
 	bool Scalecomboflag = true;
 	bool Scalecomboflag2 = false;
 	int ScalecomboTime = 0;
+
 
 };
 

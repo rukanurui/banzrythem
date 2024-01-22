@@ -179,7 +179,7 @@ void Buns::OnCollision(const CollisionInfo& info)
                 SandAttribute = 1;
                 Sandwich = true;
 
-                if (rotation.z + 180.0f + perfect_e >= IngredientsRotation.z && rotation.z + 180.0f - perfect_e <= IngredientsRotation.z)
+                     if (rotation.z + 180.0f + perfect_e >= IngredientsRotation.z && rotation.z + 180.0f - perfect_e <= IngredientsRotation.z)
                 {
                     perfect = true;
                 }

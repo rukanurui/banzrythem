@@ -323,6 +323,7 @@ void GameScene::Update()
          
             collisionManager->CheckAllCollisions();
 
+
             if (bunsup->GetSand() == 1 && bunsdown->GetSand() == 1)
             {
                 Scalecomboflag = false;
@@ -386,7 +387,9 @@ void GameScene::Update()
 
             foodnum = bunsup->GetSandAttribute();
 
-            if (foodnum == meat)
+            cooltime--;
+
+            if (foodnum == meat && cooltime <=0)
             {
                 std::unique_ptr<FBXobj3d>& listmeat = std::make_unique<FBXobj3d>();
                 listmeat->Initialize();
@@ -397,11 +400,12 @@ void GameScene::Update()
 
                 lap = lap + 0.7f;
                 bunslap = bunslap + 0.7f;
+                cooltime = 60;
             }
-            else if (foodnum == bunsnum)
+            else if (foodnum == bunsnum && cooltime <= 0)
             {
             }
-            else if (foodnum == tomato)
+            else if (foodnum == tomato && cooltime <= 0)
             {
                 std::unique_ptr<FBXobj3d>& listtomato = std::make_unique<FBXobj3d>();
                 listtomato->Initialize();
@@ -430,8 +434,9 @@ void GameScene::Update()
 
                 lap = lap + 0.7f;
                 bunslap = bunslap + 0.7f;
+                cooltime = 60;
             }
-            else if (foodnum == retasu)
+            else if (foodnum == retasu && cooltime <= 0)
             {
                 std::unique_ptr<FBXobj3d>& listretasu = std::make_unique<FBXobj3d>();
                 listretasu->Initialize();
@@ -448,8 +453,9 @@ void GameScene::Update()
 
                 lap = lap + 0.7f;
                 bunslap = bunslap + 0.7f;
+                cooltime = 60;
             }
-            else if (foodnum == chease)
+            else if (foodnum == chease && cooltime <= 0)
             {
                 std::unique_ptr<FBXobj3d>& listchases = std::make_unique<FBXobj3d>();
                 listchases->Initialize();
@@ -460,8 +466,9 @@ void GameScene::Update()
 
                 lap = lap + 0.7f;
                 bunslap = bunslap + 0.7f;
+                cooltime = 60;
             }
-            else if (foodnum == sox)
+            else if (foodnum == sox && cooltime <= 0)
             {
                 std::unique_ptr<FBXobj3d>& listsoxs = std::make_unique<FBXobj3d>();
                 listsoxs->Initialize();
@@ -472,6 +479,7 @@ void GameScene::Update()
 
                 lap = lap + 0.7f;
                 bunslap = bunslap + 0.7f;
+                cooltime = 60;
             }
 
             for (std::unique_ptr<FBXobj3d>& listmeat : meats)
