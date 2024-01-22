@@ -179,24 +179,48 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     random_->SettirzuModel(cheasemodel);
     random_->SetkutusitaModel(soxmodel);
 
-    score_ = new ScoreManager();
+    minibunsup = new FBXobj3d();
+    minibunsup->Initialize();
+    minibunsup->SetPosition({ 4.0f,bunslap,5.0f });
+    minibunsup->SetScale({ 0.004f,0.004f,0.004f });
+    minibunsup->SetModel(bunsmodel1);
 
-    //背景
+    minibunsup2 = new FBXobj3d();
+    minibunsup2->Initialize();
+    minibunsup2->SetPosition({ 4.0f,bunslap,5.0f });
+    minibunsup2->SetScale({ 0.004f,0.004f,0.004f });
+    minibunsup2->SetModel(bunsmodel2);
 
-    //プレイヤー関連処理
+    minibunsup3 = new FBXobj3d();
+    minibunsup3->Initialize();
+    minibunsup3->SetPosition({ 4.0f,bunslap,5.0f });
+    minibunsup3->SetScale({ 0.004f,0.004f,0.004f });
+    minibunsup3->SetModel(bunsmodel3);
+
+    minibunsdown = new FBXobj3d();
+    minibunsdown->Initialize();
+    minibunsdown->SetPosition({ 4.0f,2.0f,5.0f });
+    minibunsdown->SetScale({ 0.004f,0.004f,0.004f });
+    minibunsdown->SetRotation({ 0.0f,0.0f,-180.0f });
+    minibunsdown->SetModel(bunsmodel1);
+
+    minibunsdown2 = new FBXobj3d();
+    minibunsdown2->Initialize();
+    minibunsdown2->SetPosition({ 4.0f,2.0f,5.0f });
+    minibunsdown2->SetScale({ 0.004f,0.004f,0.004f });
+    minibunsdown2->SetRotation({ 0.0f,0.0f,-180.0f });
+    minibunsdown2->SetModel(bunsmodel2);
+
+    minibunsdown3 = new FBXobj3d();
+    minibunsdown3->Initialize();
+    minibunsdown3->SetPosition({ 4.0f,2.0f,5.0f });
+    minibunsdown3->SetScale({ 0.004f,0.004f,0.004f });
+    minibunsdown3->SetRotation({ 0.0f,0.0f,-180.0f });
+    minibunsdown3->SetModel(bunsmodel3);
+
    
 
-    //地形3dオブジェクト
-   
-
-    ////壁のスケール0.1=ワールドで10
-
-    //ステージデータ読み取り
-
-
-
-    //敵の生成
- 
+    score_ = new ScoreManager(); 
 
     int counter = 0; // アニメーションの経過時間カウンター(アニメーションするfbxの時のみ使用)
 
@@ -284,12 +308,19 @@ void GameScene::Update()
             bunsdown3->Update();
             bunsup->BunsUpdate();
             bunsdown->BunsUpdate();
+            minibunsup->Update();
+            minibunsup2->Update();
+            minibunsup3->Update();
+            minibunsdown->Update();
+            minibunsdown2->Update();
+            minibunsdown3->Update();
             camera->CurrentUpdate();
             sousa->Update();
             back->Update();
           
             //debugText->Print("105", 100, 100, 50);
 
+         
             collisionManager->CheckAllCollisions();
 
             if (bunsup->GetSand() == 1 && bunsdown->GetSand() == 1)
@@ -352,6 +383,133 @@ void GameScene::Update()
             score_->SetPerfect(bunsup->GetPerfect());
 
             score_->Update();
+
+            foodnum = bunsup->GetSandAttribute();
+
+            if (foodnum == meat)
+            {
+                std::unique_ptr<FBXobj3d>& listmeat = std::make_unique<FBXobj3d>();
+                listmeat->Initialize();
+                listmeat->SetModel(meatmodel);
+                listmeat->SetPosition({ 4.0f, lap,5.0f });
+                listmeat->SetScale({ 0.004f,0.004f,0.004f });
+                meats.push_back(std::move(listmeat));
+
+                lap = lap + 0.7f;
+                bunslap = bunslap + 0.7f;
+            }
+            else if (foodnum == bunsnum)
+            {
+            }
+            else if (foodnum == tomato)
+            {
+                std::unique_ptr<FBXobj3d>& listtomato = std::make_unique<FBXobj3d>();
+                listtomato->Initialize();
+                listtomato->SetModel(tomatomodel1);
+                listtomato->SetPosition({ 4.0f, lap,5.0f });
+                listtomato->SetScale({ 0.004f,0.004f,0.004f });
+                tomatos.push_back(std::move(listtomato));
+                std::unique_ptr<FBXobj3d>& listtomato2 = std::make_unique<FBXobj3d>();
+                listtomato2->Initialize();
+                listtomato2->SetModel(tomatomodel2);
+                listtomato2->SetPosition({ 4.0f, lap,5.0f });
+                listtomato2->SetScale({ 0.004f,0.004f,0.004f });
+                tomato2s.push_back(std::move(listtomato2));
+                std::unique_ptr<FBXobj3d>& listtomato3 = std::make_unique<FBXobj3d>();
+                listtomato3->Initialize();
+                listtomato3->SetModel(tomatomodel3);
+                listtomato3->SetPosition({ 4.0f, lap,5.0f });
+                listtomato3->SetScale({ 0.004f,0.004f,0.004f });
+                tomato3s.push_back(std::move(listtomato3));
+                std::unique_ptr<FBXobj3d>& listtomato4 = std::make_unique<FBXobj3d>();
+                listtomato4->Initialize();
+                listtomato4->SetModel(tomatomodel4);
+                listtomato4->SetPosition({ 4.0f, lap,5.0f });
+                listtomato4->SetScale({ 0.004f,0.004f,0.004f });
+                tomato4s.push_back(std::move(listtomato4));
+
+                lap = lap + 0.7f;
+                bunslap = bunslap + 0.7f;
+            }
+            else if (foodnum == retasu)
+            {
+                std::unique_ptr<FBXobj3d>& listretasu = std::make_unique<FBXobj3d>();
+                listretasu->Initialize();
+                listretasu->SetModel(retasumodel1);
+                listretasu->SetPosition({ 4.0f, lap,5.0f });
+                listretasu->SetScale({ 0.004f,0.004f,0.004f });
+                retasus.push_back(std::move(listretasu));
+                std::unique_ptr<FBXobj3d>& listretasu2 = std::make_unique<FBXobj3d>();
+                listretasu2->Initialize();
+                listretasu2->SetModel(retasumodel2);
+                listretasu2->SetPosition({ 4.0f, lap,5.0f });
+                listretasu2->SetScale({ 0.004f,0.004f,0.004f });
+                retasu2s.push_back(std::move(listretasu2));
+
+                lap = lap + 0.7f;
+                bunslap = bunslap + 0.7f;
+            }
+            else if (foodnum == chease)
+            {
+                std::unique_ptr<FBXobj3d>& listchases = std::make_unique<FBXobj3d>();
+                listchases->Initialize();
+                listchases->SetModel(cheasemodel);
+                listchases->SetPosition({ 4.0f, lap,5.0f });
+                listchases->SetScale({ 0.004f,0.004f,0.004f });
+                chases.push_back(std::move(listchases));
+
+                lap = lap + 0.7f;
+                bunslap = bunslap + 0.7f;
+            }
+            else if (foodnum == sox)
+            {
+                std::unique_ptr<FBXobj3d>& listsoxs = std::make_unique<FBXobj3d>();
+                listsoxs->Initialize();
+                listsoxs->SetModel(soxmodel);
+                listsoxs->SetPosition({ 4.0f, lap,5.0f });
+                listsoxs->SetScale({ 0.004f,0.004f,0.004f });
+                soxs.push_back(std::move(listsoxs));
+
+                lap = lap + 0.7f;
+                bunslap = bunslap + 0.7f;
+            }
+
+            for (std::unique_ptr<FBXobj3d>& listmeat : meats)
+            {
+                listmeat->Update();
+            }
+            for (std::unique_ptr<FBXobj3d>& listtomato : tomatos)
+            {
+                listtomato->Update();
+            }
+            for (std::unique_ptr<FBXobj3d>& listtomato2 : tomato2s)
+            {
+                listtomato2->Update();
+            }
+            for (std::unique_ptr<FBXobj3d>& listtomato3 : tomato3s)
+            {
+                listtomato3->Update();
+            }
+            for (std::unique_ptr<FBXobj3d>& listtomato4 : tomato4s)
+            {
+                listtomato4->Update();
+            }
+            for (std::unique_ptr<FBXobj3d>& listretasu : retasus)
+            {
+                listretasu->Update();
+            }
+            for (std::unique_ptr<FBXobj3d>& listretasu2 : retasu2s)
+            {
+                listretasu2->Update();
+            }
+            for (std::unique_ptr<FBXobj3d>& listchase : chases)
+            {
+                listchase->Update();
+            }
+            for (std::unique_ptr<FBXobj3d>& listsox : soxs)
+            {
+                listsox->Update();
+            }
 
             bunsup->SetEndSand(score_->GetSandWitch());
             bunsdown->SetEndSand(score_->GetSandWitch());
@@ -441,9 +599,52 @@ void GameScene::Draw()
          bunsdown->Draw(cmdList);
          bunsdown2->Draw(cmdList);
          bunsdown3->Draw(cmdList);
+
+         minibunsup->Draw(cmdList);
+         minibunsup2->Draw(cmdList);
+         minibunsup3->Draw(cmdList);
+         minibunsdown->Draw(cmdList);
+         minibunsdown2->Draw(cmdList);
+         minibunsdown3->Draw(cmdList);
          
          random_->RandomDraw(cmdList);
 
+         for (std::unique_ptr<FBXobj3d>& listmeat : meats)
+         {
+             listmeat->Draw(cmdList);
+         }
+         for (std::unique_ptr<FBXobj3d>& listtomato : tomatos)
+         {
+             listtomato->Draw(cmdList);
+         }
+         for (std::unique_ptr<FBXobj3d>& listtomato2 : tomato2s)
+         {
+             listtomato2->Draw(cmdList);
+         }
+         for (std::unique_ptr<FBXobj3d>& listtomato3 : tomato3s)
+         {
+             listtomato3->Draw(cmdList);
+         }
+         for (std::unique_ptr<FBXobj3d>& listtomato4 : tomato4s)
+         {
+             listtomato4->Draw(cmdList);
+         }
+         for (std::unique_ptr<FBXobj3d>& listretasu : retasus)
+         {
+             listretasu->Draw(cmdList);
+         }
+         for (std::unique_ptr<FBXobj3d>& listretasu2 : retasu2s)
+         {
+             listretasu2->Draw(cmdList);
+         }
+         for (std::unique_ptr<FBXobj3d>& listchase : chases)
+         {
+             listchase->Draw(cmdList);
+         }
+         for (std::unique_ptr<FBXobj3d>& listsox : soxs)
+         {
+             listsox->Draw(cmdList);
+         }
          //  スプライト描画前処理
          spriteCommon->PreDraw();
          //back->Draw();

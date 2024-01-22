@@ -132,6 +132,33 @@ private://メンバ変数
 	FBXobj3d* bunsdown2 = nullptr;//下のバンズ2
 	FBXobj3d* bunsdown3 = nullptr;//下のバンズ3
 
+	FBXobj3d* minibunsup = nullptr;//ちっちゃい上のバンズ
+	FBXobj3d* minibunsup2 = nullptr;//ちっちゃい上のバンズ2
+	FBXobj3d* minibunsup3 = nullptr;//ちっちゃい上のバンズ3
+	FBXobj3d* minibunsdown = nullptr;//ちっちゃい下のバンズ
+	FBXobj3d* minibunsdown2 = nullptr;//ちっちゃい下のバンズ2
+	FBXobj3d* minibunsdown3 = nullptr;//ちっちゃい下のバンズ3
+	FBXobj3d* minimeat = nullptr;//ちっちゃい肉
+	FBXobj3d* minichase = nullptr;//ちっちゃいチーズ
+	FBXobj3d* minisox = nullptr;//ちっちゃい靴下
+	FBXobj3d* minitomato = nullptr;//ちっちゃいトマト
+	FBXobj3d* minitomato2 = nullptr;//ちっちゃいトマト2
+	FBXobj3d* minitomato3 = nullptr;//ちっちゃいトマト3
+	FBXobj3d* minitomato4 = nullptr;//ちっちゃいトマト4
+	FBXobj3d* miniretasu = nullptr;//レタスモデル
+	FBXobj3d* miniretasu2 = nullptr;//レタスモデル2
+	float bunslap = 3.0f;
+	float lap = 2.2f; //かさなるちいさい具材のy軸
+	std::list<std::unique_ptr<FBXobj3d>>meats;
+	std::list<std::unique_ptr<FBXobj3d>>tomatos;
+	std::list<std::unique_ptr<FBXobj3d>>tomato2s;
+	std::list<std::unique_ptr<FBXobj3d>>tomato3s;
+	std::list<std::unique_ptr<FBXobj3d>>tomato4s;
+	std::list<std::unique_ptr<FBXobj3d>>soxs;
+	std::list<std::unique_ptr<FBXobj3d>>chases;
+	std::list<std::unique_ptr<FBXobj3d>>retasus;
+	std::list<std::unique_ptr<FBXobj3d>>retasu2s;
+
 	RandomObj* random_ = nullptr;
 	ScoreManager* score_ = nullptr;
 
@@ -143,6 +170,19 @@ private://メンバ変数
 	//ゲームで使う変数
 	XMVECTOR upVel = { 0.0f,0.0f,0.0f };
 	XMVECTOR downVel = { 0.0f,0.0f,0.0f };
+
+	int foodnum = 0;
+
+	enum food
+	{
+		None,//何もなし
+		meat,//肉
+		bunsnum,//バンズ
+		tomato,//トマト
+		retasu,//レタス
+		chease,//チーズ
+		sox//靴下
+	};
 
 	
 

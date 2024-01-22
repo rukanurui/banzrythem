@@ -32,6 +32,8 @@ public:
 
 	void SetEndSand(bool flag) { EndSand = flag; }
 
+	void SetSandAttribute(int flag) { SandAttribute = flag; }
+
 private:
 	//ƒ|ƒCƒ“ƒ^
 	Input* input = nullptr;

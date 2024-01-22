@@ -151,6 +151,8 @@ void Buns::BunsUpdate()
         Velocity = { 0.0f,0.0f,0.0f };
     }
 
+    SandAttribute = 0;
+
     
     MoveVector(Velocity);
 
