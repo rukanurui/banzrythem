@@ -56,6 +56,10 @@ public:
 
 	bool GetGetFlag() { return GetFlag; }
 
+	FLOAT GetPosZZ() { return posZ; }//具材のz座標
+
+	FLOAT GetCreateObjTime() { return CreateObjTime; }
+
 private:
 	//ランダム変数
 	float RandomHalfway_X = 0;
@@ -92,6 +96,6 @@ private:
 	FbxModel* tirzumodel = nullptr;//モデル
 	FbxModel* kutusitamodel = nullptr;//モデル
 
-
+	float posZ = 0;
 };
 

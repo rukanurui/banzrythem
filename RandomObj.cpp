@@ -182,6 +182,7 @@ void RandomObj::RandomUpdate()
 	XMFLOAT3 pos[100] = {};
 	XMFLOAT3 rotate[100] = {};
 	XMFLOAT3 size[100] = {};
+	
 
 	//çXêV
 	for (std::unique_ptr<RandomObj>& Obj_ : Objs) {

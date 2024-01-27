@@ -72,6 +72,8 @@ private://メンバ変数
 	Sprite* debugText  = nullptr;
 	Sprite* debugText2 = nullptr;
 	Sprite* debugText3 = nullptr;
+	Sprite* debugText4 = nullptr;
+
 
 	Audio* audio = nullptr;
 	Camera* camera = nullptr;
@@ -91,6 +93,8 @@ private://メンバ変数
 
 	Sprite* back = nullptr;
 
+	Sprite* ring = nullptr;//波紋
+
 
 
 	TransEffect* transEffect = nullptr;
@@ -99,6 +103,9 @@ private://メンバ変数
 	XMFLOAT2 spritesize = { 1280,720 };
 
 	XMFLOAT2 Effectsize{ 0,0 };
+
+	XMFLOAT2 ringsize = { 800,800 };
+	bool ringflag = false;
 	float transcount = 0;
 	bool transscene = false;
 	
@@ -165,6 +172,8 @@ private://メンバ変数
 	char moji[64];
 	char moji2[64];
 	char moji3[64];
+	char moji4[64];
+
 
 
 	//ゲームで使う変数
@@ -199,7 +208,7 @@ private://メンバ変数
 	int firstfrag = 0;
 
 	//シーン関連
-	int timecount = 0;//時間管理酔う変数
+	int timecount = 60;//時間管理酔う変数
 	int time2count = 0;
 	//死んだときのシーン
 	int diescene = 0;

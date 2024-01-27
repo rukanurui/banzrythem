@@ -50,6 +50,8 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     spriteCommon->LoadTexture(4, L"Resources/UI/GOOD1.png");
     spriteCommon->LoadTexture(5, L"Resources/UI/BAD1.png");
     spriteCommon->LoadTexture(6, L"Resources/back.png");
+    spriteCommon->LoadTexture(7, L"Resources/ring.png");
+
 
 
 
@@ -96,6 +98,12 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     //back->SetRotation(0);
     back->SetSize({ 1280,720 });
     back->TransferVertexBuffer();
+
+    ring = Sprite::Create(spriteCommon, 7);
+    ring->SetPosition({ 640,360,0 });
+    ring->SetSize({ ringsize});
+    ring->TransferVertexBuffer();
+    
 
     int PFnum = 101;
     //ポストエフェクトの初期化
@@ -230,7 +238,7 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     debugText = new Sprite();
     debugText2 = new Sprite();
     debugText3 = new Sprite();
-
+    debugText4 = new Sprite();
 
 
     const int debugTextTexNumber = 2;
@@ -238,6 +246,7 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     debugText->DebugInitialize(spriteCommon, debugTextTexNumber);
     debugText2->DebugInitialize(spriteCommon, debugTextTexNumber);
     debugText3->DebugInitialize(spriteCommon, debugTextTexNumber);
+    debugText4->DebugInitialize(spriteCommon, debugTextTexNumber);
 
 }
 
@@ -279,8 +288,12 @@ void GameScene::Update()
 
         if (time2count >= 60)
         {
+            if (timecount <= 0)
+            {
+                timecount = 0;
+            }
             time2count = 0;
-            timecount += 1;
+            timecount -= 1;  
         }
 
         if (count < 3600)
@@ -317,7 +330,7 @@ void GameScene::Update()
             camera->CurrentUpdate();
             sousa->Update();
             back->Update();
-          
+            ring->Update(); 
             //debugText->Print("105", 100, 100, 50);
 
          
@@ -375,6 +388,29 @@ void GameScene::Update()
             bad->SetSize({ Scalecombo });
             bad->Update();
             bad->TransferVertexBuffer();
+
+            //波紋
+            if (random_->GetCreateObjTime() >= 299)//具材が生成される時、波紋を出す
+            {
+                ringflag = true;
+            }
+            if (ringflag == true && timecount >= 1)//波紋を小さくする
+            {
+                ringsize.x -= 7.5f;
+                ringsize.y -= 7.5f;
+                ring->SetSize({ ringsize });
+                ring->TransferVertexBuffer();
+            }   
+            if (ringsize.x <= 0.0f)//波紋が小さくなりきったら戻す
+            {
+                ringsize.x = 800;
+                ringsize.y = 800;
+                ring->SetSize({ ringsize });
+                ring->TransferVertexBuffer();
+                ringflag = false;
+            }
+
+            
 
             //セット処理
             score_->SetUpSandPoint(bunsup->GetSand());
@@ -597,7 +633,15 @@ void GameScene::Draw()
      if (playscene == 1)
      {
          spriteCommon->PreDraw();
-         if (transscene != false)back->Draw();
+         if (transscene != false)
+         {
+             back->Draw();
+             if (ringflag == true && timecount >= 1)
+             {
+                 ring->Draw();
+             }
+         }
+
 
 
          
@@ -659,6 +703,8 @@ void GameScene::Draw()
 
 
          sousa->Draw();
+
+        
          if (score_->GetType() == 1)
          {
              perfect->Draw();
@@ -677,23 +723,25 @@ void GameScene::Draw()
              owari->Draw();
          }
 
+
          // デバッグテキスト描画
          sprintf_s(moji, "%d", score_->GetCombo());
          sprintf_s(moji2, "%d", score_->GetScore());
          sprintf_s(moji3, "%d", timecount);
+         sprintf_s(moji4, "%f", ringsize.x);
 
-   
          debugText->SetColor({ 1,1,1,0 });
-         debugText->DebugPrint(moji, 100, 100,3.0f);
+         debugText->DebugPrint(moji, 100, 150,3.0f);
          debugText->DebugDrawAll();
          
-         debugText2->DebugPrint(moji2, 640, 360);
+         debugText2->DebugPrint(moji2, 1080, 630);
          debugText2->DebugDrawAll();
 
-         debugText3->DebugPrint(moji3, 640, 100);
+         debugText3->DebugPrint(moji3, 100, 50);
          debugText3->DebugDrawAll();
 
-
+         //debugText4->DebugPrint(moji4, 100, 300);
+        // debugText4->DebugDrawAll();
      }
 
    //  floor->Draw(cmdList);
