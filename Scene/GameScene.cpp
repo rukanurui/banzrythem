@@ -191,12 +191,14 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     random_->SetretasuModel2(retasumodel2);
     random_->SettirzuModel(cheasemodel);
     random_->SetkutusitaModel(soxmodel);
+    
 
     minibunsup = new FBXobj3d();
     minibunsup->Initialize();
     minibunsup->SetPosition({ 4.0f,bunslap,5.0f });
     minibunsup->SetScale({ 0.004f,0.004f,0.004f });
     minibunsup->SetModel(bunsmodel1);
+  
 
     minibunsup2 = new FBXobj3d();
     minibunsup2->Initialize();
@@ -545,6 +547,7 @@ void GameScene::Update()
                 listsoxs->SetModel(soxmodel);
                 listsoxs->SetPosition({ 4.0f, lap,5.0f });
                 listsoxs->SetScale({ 0.004f,0.004f,0.004f });
+                listsoxs->SetRotation({ 65,0,0 });
                 soxs.push_back(std::move(listsoxs));
 
                 lap = lap + 0.1f;
@@ -608,6 +611,11 @@ void GameScene::Update()
        }
         else if(count >= 3600)
         {
+            if (timecount <= 0)
+            {
+                timecount = 0;
+            }
+
             bunsup->Update();
             bunsup2->Update();
             bunsup3->Update();
@@ -623,53 +631,57 @@ void GameScene::Update()
             minibunsdown2->Update();
             minibunsdown3->Update();
 
-            minibunsup->SetPosition({ 0.0f,bunslap,5.0f });
-            minibunsup2->SetPosition({ 0.0f,bunslap,5.0f });
-            minibunsup3->SetPosition({ 0.0f,bunslap,5.0f });
+            minibunsup->SetPosition({ 0.0f,bunslap+0.2f,5.0f });
+            minibunsup2->SetPosition({ 0.0f,bunslap+0.2f,5.0f });
+            minibunsup3->SetPosition({ 0.0f,bunslap+0.2f,5.0f });
+
+            minibunsdown->SetPosition({ 0.0f,2.2f,5.0f });
+            minibunsdown2->SetPosition({ 0.0f,2.2f,5.0f });
+            minibunsdown3->SetPosition({ 0.0f,2.2f,5.0f });
 
             for (std::unique_ptr<FBXobj3d>& listmeat : meats)
             {
-                listmeat->SetPosX(0);
+                listmeat->SetPosX(0.0f,0.2f);
                 listmeat->Update();
             }
             for (std::unique_ptr<FBXobj3d>& listtomato : tomatos)
             {
-                listtomato->SetPosX(0);
+                listtomato->SetPosX(0.0f, 0.2f);
                 listtomato->Update();
             }
             for (std::unique_ptr<FBXobj3d>& listtomato2 : tomato2s)
             {
-                listtomato2->SetPosX(0);
+                listtomato2->SetPosX(0.0f, 0.2f);
                 listtomato2->Update();
             }
             for (std::unique_ptr<FBXobj3d>& listtomato3 : tomato3s)
             {
-                listtomato3->SetPosX(0);
+                listtomato3->SetPosX(0.0f, 0.2f);
                 listtomato3->Update();
             }
             for (std::unique_ptr<FBXobj3d>& listtomato4 : tomato4s)
             {
-                listtomato4->SetPosX(0);
+                listtomato4->SetPosX(0.0f, 0.2f);
                 listtomato4->Update();
             }
             for (std::unique_ptr<FBXobj3d>& listretasu : retasus)
             {
-                listretasu->SetPosX(0);
+                listretasu->SetPosX(0.0f, 0.2f);
                 listretasu->Update();
             }
             for (std::unique_ptr<FBXobj3d>& listretasu2 : retasu2s)
             {
-                listretasu2->SetPosX(0);
+                listretasu2->SetPosX(0.0f, 0.2f);
                 listretasu2->Update();
             }
             for (std::unique_ptr<FBXobj3d>& listchase : chases)
             {
-                listchase->SetPosX(0);
+                listchase->SetPosX(0.0f, 0.2f);
                 listchase->Update();
             }
             for (std::unique_ptr<FBXobj3d>& listsox : soxs)
             {
-                listsox->SetPosX(0);
+                listsox->SetPosX(0.0f, 0.2f);
                 listsox->Update();
             }
 
@@ -736,17 +748,25 @@ void GameScene::Draw()
              {
                  ring->Draw();
              }
+
+             if (count > 3600)
+             {
+
+                 owari->Draw();
+             }
          }
 
 
 
-         
-         bunsup->Draw(cmdList);
-         bunsup2->Draw(cmdList);
-         bunsup3->Draw(cmdList);
-         bunsdown->Draw(cmdList);
-         bunsdown2->Draw(cmdList);
-         bunsdown3->Draw(cmdList);
+         if (count < 3600)
+         {
+             bunsup->Draw(cmdList);
+             bunsup2->Draw(cmdList);
+             bunsup3->Draw(cmdList);
+             bunsdown->Draw(cmdList);
+             bunsdown2->Draw(cmdList);
+             bunsdown3->Draw(cmdList);
+         }
 
          minibunsup->Draw(cmdList);
          minibunsup2->Draw(cmdList);
@@ -797,8 +817,10 @@ void GameScene::Draw()
          spriteCommon->PreDraw();
          //back->Draw();
 
-
-         sousa->Draw();
+         if (count < 3600)
+         {
+             sousa->Draw();
+         }
 
         
          if (score_->GetType() == 1)
@@ -814,32 +836,33 @@ void GameScene::Draw()
              bad->Draw();
          }
 
-         if (count > 3600)
-         {
-             owari->Draw();
-         }
+       
 
 
          // デバッグテキスト描画
          sprintf_s(moji, "%d", score_->GetCombo());
          sprintf_s(moji2, "%d", score_->GetScore());
          sprintf_s(moji3, "%d", timecount);
-         sprintf_s(moji4, "%f", ringsize.x);
+         sprintf_s(moji4, "SCORE");
 
-         debugText->SetColor({ 1,1,1,0 });
-         debugText->DebugPrint(moji, 100, 150,3.0f);
-         debugText->DebugDrawAll();
-         
-         debugText2->DebugPrint(moji2, 1080, 630);
-         debugText2->DebugDrawAll();
+         if (count < 3600)
+         {
+             debugText->SetColor({ 1,1,1,0 });
+             debugText->DebugPrint(moji, 240, 180, 1.8f);
+             debugText->DebugDrawAll();
 
-         debugText3->DebugPrint(moji3, 100, 50);
-         debugText3->DebugDrawAll();
+             debugText2->DebugPrint(moji2, 1080, 630);
+             debugText2->DebugDrawAll();
+
+             debugText3->DebugPrint(moji3, 100, 50);
+             debugText3->DebugDrawAll();
+         }
 
          if (count >= 3600)
          {
-             debugText2->DebugPrint(moji2, 1080, 360);
+             debugText2->DebugPrint(moji2, 880, 360);
              debugText2->DebugDrawAll();
+
 
          }
          //debugText4->DebugPrint(moji4, 100, 300);
