@@ -88,6 +88,7 @@ public://メンバ関数
 	static void SetCamera(Camera* camera) { FBXobj3d::camera = camera; }
 	//ポジションの変更
 	void SetPosition(XMFLOAT3 position) { this->position = position; }
+	void SetPosX(float x) { this->position.x = x; }
 	//スケールの変更
 	void SetScale(XMFLOAT3 scale) { this->scale = scale; }
 	//角度の変更

@@ -70,5 +70,6 @@ void ScoreManager::Update()
 	else
 	{
 		combo = 0;
+		type = 4;
 	}
 }

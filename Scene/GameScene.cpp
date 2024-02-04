@@ -52,7 +52,12 @@ void GameScene::Initialize(DXCommon* dxcommon, Input* input, Audio* audio, Sprit
     spriteCommon->LoadTexture(6, L"Resources/back.png");
     spriteCommon->LoadTexture(7, L"Resources/ring.png");
 
-
+    //音源読み込み
+    this->audio = new Audio();
+    this->audio->Initialize();
+    this->audio->LoadWave("Resources/perfect.wav");
+    this->audio->LoadWave("Resources/good.wav");
+    this->audio->LoadWave("Resources/bad.wav");
 
 
 
@@ -408,6 +413,7 @@ void GameScene::Update()
                 ring->SetSize({ ringsize });
                 ring->TransferVertexBuffer();
                 ringflag = false;
+                soundFlag = true;
             }
 
             
@@ -420,6 +426,34 @@ void GameScene::Update()
             score_->SetPerfect(bunsup->GetPerfect());
 
             score_->Update();
+
+            if (score_->GetType() == 1)
+            {
+                if (soundFlag == true)
+                {
+                    this->audio->PlayWave("Resources/perfect.wav");
+                }
+                soundFlag = false;
+
+            }
+            else  if (score_->GetType() == 2)
+            {
+                if (soundFlag == true)
+                {
+                  this->audio->PlayWave("Resources/good.wav");
+                }
+                soundFlag = false;
+
+            }
+            else if (score_->GetType() == 3)
+            {
+                if (soundFlag == true)
+                {
+                this->audio->PlayWave("Resources/bad.wav");
+                 }
+                 soundFlag = false;
+
+            }
 
             foodnum = bunsup->GetSandAttribute();
 
@@ -434,8 +468,8 @@ void GameScene::Update()
                 listmeat->SetScale({ 0.004f,0.004f,0.004f });
                 meats.push_back(std::move(listmeat));
 
-                lap = lap + 0.7f;
-                bunslap = bunslap + 0.7f;
+                lap = lap + 0.12f;
+                bunslap = bunslap + 0.12f;
                 cooltime = 60;
             }
             else if (foodnum == bunsnum && cooltime <= 0)
@@ -468,8 +502,8 @@ void GameScene::Update()
                 listtomato4->SetScale({ 0.004f,0.004f,0.004f });
                 tomato4s.push_back(std::move(listtomato4));
 
-                lap = lap + 0.7f;
-                bunslap = bunslap + 0.7f;
+                lap = lap + 0.1f;
+                bunslap = bunslap + 0.1f;
                 cooltime = 60;
             }
             else if (foodnum == retasu && cooltime <= 0)
@@ -487,8 +521,8 @@ void GameScene::Update()
                 listretasu2->SetScale({ 0.004f,0.004f,0.004f });
                 retasu2s.push_back(std::move(listretasu2));
 
-                lap = lap + 0.7f;
-                bunslap = bunslap + 0.7f;
+                lap = lap + 0.1f;
+                bunslap = bunslap + 0.1f;
                 cooltime = 60;
             }
             else if (foodnum == chease && cooltime <= 0)
@@ -500,8 +534,8 @@ void GameScene::Update()
                 listchases->SetScale({ 0.004f,0.004f,0.004f });
                 chases.push_back(std::move(listchases));
 
-                lap = lap + 0.7f;
-                bunslap = bunslap + 0.7f;
+                lap = lap + 0.1f;
+                bunslap = bunslap + 0.1f;
                 cooltime = 60;
             }
             else if (foodnum == sox && cooltime <= 0)
@@ -513,8 +547,8 @@ void GameScene::Update()
                 listsoxs->SetScale({ 0.004f,0.004f,0.004f });
                 soxs.push_back(std::move(listsoxs));
 
-                lap = lap + 0.7f;
-                bunslap = bunslap + 0.7f;
+                lap = lap + 0.1f;
+                bunslap = bunslap + 0.1f;
                 cooltime = 60;
             }
 
@@ -567,7 +601,11 @@ void GameScene::Update()
             bunsdown3->SetPosition(bunsdown->GetPos());
             bunsdown2->SetRotation(bunsdown->GetRotation());
             bunsdown3->SetRotation(bunsdown->GetRotation());
-        }
+
+            minibunsup->SetPosition({ 4.0f,bunslap,5.0f });
+            minibunsup2->SetPosition({ 4.0f,bunslap,5.0f });
+            minibunsup3->SetPosition({ 4.0f,bunslap,5.0f }); 
+       }
         else if(count >= 3600)
         {
             bunsup->Update();
@@ -578,6 +616,64 @@ void GameScene::Update()
             bunsdown3->Update();
             owari->Update();
             camera->CurrentUpdate();
+            minibunsup->Update();
+            minibunsup2->Update();
+            minibunsup3->Update();
+            minibunsdown->Update();
+            minibunsdown2->Update();
+            minibunsdown3->Update();
+
+            minibunsup->SetPosition({ 0.0f,bunslap,5.0f });
+            minibunsup2->SetPosition({ 0.0f,bunslap,5.0f });
+            minibunsup3->SetPosition({ 0.0f,bunslap,5.0f });
+
+            for (std::unique_ptr<FBXobj3d>& listmeat : meats)
+            {
+                listmeat->SetPosX(0);
+                listmeat->Update();
+            }
+            for (std::unique_ptr<FBXobj3d>& listtomato : tomatos)
+            {
+                listtomato->SetPosX(0);
+                listtomato->Update();
+            }
+            for (std::unique_ptr<FBXobj3d>& listtomato2 : tomato2s)
+            {
+                listtomato2->SetPosX(0);
+                listtomato2->Update();
+            }
+            for (std::unique_ptr<FBXobj3d>& listtomato3 : tomato3s)
+            {
+                listtomato3->SetPosX(0);
+                listtomato3->Update();
+            }
+            for (std::unique_ptr<FBXobj3d>& listtomato4 : tomato4s)
+            {
+                listtomato4->SetPosX(0);
+                listtomato4->Update();
+            }
+            for (std::unique_ptr<FBXobj3d>& listretasu : retasus)
+            {
+                listretasu->SetPosX(0);
+                listretasu->Update();
+            }
+            for (std::unique_ptr<FBXobj3d>& listretasu2 : retasu2s)
+            {
+                listretasu2->SetPosX(0);
+                listretasu2->Update();
+            }
+            for (std::unique_ptr<FBXobj3d>& listchase : chases)
+            {
+                listchase->SetPosX(0);
+                listchase->Update();
+            }
+            for (std::unique_ptr<FBXobj3d>& listsox : soxs)
+            {
+                listsox->SetPosX(0);
+                listsox->Update();
+            }
+
+
 
             //パッドのポインタ
             pad* pad_ = nullptr;
@@ -740,6 +836,12 @@ void GameScene::Draw()
          debugText3->DebugPrint(moji3, 100, 50);
          debugText3->DebugDrawAll();
 
+         if (count >= 3600)
+         {
+             debugText2->DebugPrint(moji2, 1080, 360);
+             debugText2->DebugDrawAll();
+
+         }
          //debugText4->DebugPrint(moji4, 100, 300);
         // debugText4->DebugDrawAll();
      }

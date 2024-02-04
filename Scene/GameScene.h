@@ -73,8 +73,6 @@ private://メンバ変数
 	Sprite* debugText2 = nullptr;
 	Sprite* debugText3 = nullptr;
 	Sprite* debugText4 = nullptr;
-
-
 	Audio* audio = nullptr;
 	Camera* camera = nullptr;
 	Buns* buns = nullptr;
@@ -116,6 +114,7 @@ private://メンバ変数
 	int wait = 0;
 	int count = 0;
 
+	int soundFlag = false;
 	//3d関連
 	//モデル
 	FbxModel* bunsmodel1 = nullptr;//バンズモデル1
