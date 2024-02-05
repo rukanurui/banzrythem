@@ -631,13 +631,16 @@ void GameScene::Update()
             minibunsdown2->Update();
             minibunsdown3->Update();
 
-            minibunsup->SetPosition({ 0.0f,bunslap+0.2f,5.0f });
-            minibunsup2->SetPosition({ 0.0f,bunslap+0.2f,5.0f });
-            minibunsup3->SetPosition({ 0.0f,bunslap+0.2f,5.0f });
+ 
+            minibunsup->SetPosX(0.0f, 0.2f);
+            minibunsup2->SetPosX(0.0f, 0.2f);
+            minibunsup3->SetPosX(0.0f, 0.2f);
 
-            minibunsdown->SetPosition({ 0.0f,2.2f,5.0f });
-            minibunsdown2->SetPosition({ 0.0f,2.2f,5.0f });
-            minibunsdown3->SetPosition({ 0.0f,2.2f,5.0f });
+
+
+            minibunsdown->SetPosX(0.0f, 0.2f);
+            minibunsdown2->SetPosX(0.0f, 0.2f);
+            minibunsdown3->SetPosX(0.0f, 0.2f);
 
             for (std::unique_ptr<FBXobj3d>& listmeat : meats)
             {
