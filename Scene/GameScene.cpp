@@ -738,7 +738,7 @@ void GameScene::Draw()
          transEffect->Draw(cmdList);
      }
 
-     if (playscene == 1)
+     if (transscene == TRUE)
      {
          spriteCommon->PreDraw();
          if (transscene != false)
